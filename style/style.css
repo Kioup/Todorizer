@@ -1,0 +1,33 @@
+/* style.css */
+
+main .image-titre {
+	width : 400px;
+	height: 200px;
+	display: flex;
+	margin: 50px auto;
+}
+
+main .message {
+	text-align: center;
+}
+
+main .message img {
+	width: 40px;
+}
+
+main .message h1 {
+	font-family: "Verdana";
+	color: lightgray;
+	display: inline-block;
+}
+
+@media screen and (max-width: 780px) {
+	main .image-titre {
+		width: 200px;
+		height: 100px;
+	}
+
+	main .message h1 {
+		font-size: 1.1em;
+	}
+}
