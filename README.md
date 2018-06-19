@@ -1,2 +1,2 @@
 # Todorizer
-A student team projet !
+A student team project !
