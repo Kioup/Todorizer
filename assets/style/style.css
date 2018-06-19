@@ -145,3 +145,89 @@ div.titre h2 {
     font-family: "comfortaa", Arial, sans-serif;
 }
 
+/*main, todolist */
+
+main div.entete {
+    padding: 10px 30px;
+    background: black;
+    color: white;
+    position: relative;
+}
+
+main div.entete input[type="text"] {
+    width: 50%;
+    line-height: 1.5em;
+    font-size: 1.2em;
+    color: black;
+    font-family: "Roboto Mono", Arial, sans-serif;
+}
+
+main div.entete i {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2em;
+    right: 40px;
+}
+
+main div.list {
+    padding: 50px 100px;
+}
+
+main div.list h2{
+    font-family: "comfortaa", Arial, sans-serif;
+    font-size: 1.5em;
+}
+
+main div.list form {
+    width: 50%;
+}
+
+main div.list form input[type="text"]{
+    width: calc(100% - 100px);
+    line-height: 1.5em;
+    font-size: 1.2em;
+    color: black;
+    display: inline-block;
+    font-family: "Roboto Mono", Arial, sans-serif;
+    vertical-align: middle;
+    
+}
+
+main div.list form div.alert {
+    width: 100%;
+    color: white;
+    position: relative;
+    background-color: #fc6271;
+    padding: 5px;
+    margin: 15px 0;
+}
+
+main div.list form div.alert i {
+    font-size: 2em;
+    height: 50px;
+    margin-right: 10px;
+    line-height: 50px;
+    width: 50px;
+}
+
+main div.list form div.alert p {
+    display: inline-block;
+    font-size: 1.1em;
+    text-align: center;
+    font-family: "Roboto Mono", Arial, sans-serif;
+}
+
+main div.list form input[type="text"] + a,  main div.list form input[type="text"] + span{
+    font-size: 2em;
+    display: inline-block;
+    text-decoration: none;
+    color: white;
+    width: 50px;
+    line-height: 50px;
+    vertical-align: middle;
+    height: 50px;
+    text-align: center;
+}
+ 
+

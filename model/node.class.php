@@ -72,6 +72,24 @@
         public final function getEndDate() {
             return $this->end_date; 
         }
+        public final function getNodePath() {
+            return $this->node_path; 
+        }
+        public final function getIdParent() {
+            return $this->id_parent;
+        }
+        public final function getIdChild() {
+            return $this->id_child;
+        }
+        public final function getNbChildren() {
+            return $this->nb_children;
+        }
+        public final function getPriority() {
+            return $this->priority;
+        }
+        public final function getProgress() {
+            return $this->progress;
+        }
 
 
         

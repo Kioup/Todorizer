@@ -9,6 +9,12 @@
         private $icon_color;
         private $description;
         private $id_owner;
+        private $node_list;
+        
+        public function __construct () {
+            require_once('./model/node.class.php');
+            $this->node_list = [];
+        }
         
         /* Setter */
         
@@ -26,6 +32,13 @@
         }
         public final function setIdOwner($newIdOwner) {
             $this->id_owner = $newIdOwner;
+        }
+        public final function setNodeList($newNodeList) {
+            $this->node_list = $newNodeList;
+        }
+        
+        public final function addNodeToList($newNode) {
+            $this->node_list[$newNode->getNodePath() . '.' . $newNode->getIdChild()] = $newNode;
         }
         
         /* Getter */
@@ -47,6 +60,9 @@
         }
         public final function getIdOwner() {
             return $this->id_owner;
+        }
+        public final function getNodeList() {
+            return $this->node_list;
         }
         
         /* Hydratation */

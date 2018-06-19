@@ -1,0 +1,4 @@
+Options +FollowSymLinks -MultiViews
+RewriteEngine On
+
+RewriteRule ^(.*)$ http://todorizer.santhor.com/redirect.php?page=$1 [R=301,NC,L]

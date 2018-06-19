@@ -5,21 +5,25 @@
     }
 
 
+
     $page = "index.php";
 
-    include_once('controls/controlleur.php');
-    
-    include_once('assets/header.php');
 
-    include_once('assets/aside.php');
+    if (isset($_POST) && isset($_POST['page'])) $page = $_POST['page'];
+
+    include('controls/controller.php');
+    
+    include('assets/header.php');
 
     if (isset($_SESSION['user'])) {
 
-        include_once('assets/header2.php');
+        include('assets/aside.php');
+        include('assets/header2.php');
 
     } else {
 
-        include_once('assets/header3.php');
+        include('assets/aside2.php');        
+        include('assets/header3.php');
 
     }
 
@@ -30,7 +34,7 @@
     
 <?php
 
-    include_once('view/' .$page);
+    include('view/' .$page);
 
 ?>
     
@@ -38,6 +42,6 @@
 
 <?php
 
-    include_once('assets/footer.php');
+    include('assets/footer.php');
 
 ?>
