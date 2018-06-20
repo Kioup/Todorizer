@@ -2,7 +2,7 @@
         <a href="">
             <i class="fa fa-user"></i>
         </a>
-        <a href="">
+        <a href="/page/project.php">
             <i class="fa fa-folder"></i>
         </a>
         <a href="">

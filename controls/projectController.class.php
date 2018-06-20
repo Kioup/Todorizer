@@ -1,30 +1,25 @@
 <?php
 
-class ProjectController{
+class ProjectController {
 
     private $project;
 
     public function __construct(){
         require_once('./model/project.class.php');
-        
+        require_once('./model/node.class.php');
     }
 
     public function addProject(){        
-            $this->project = new Project();
-            $this->setProject();        
-    }
-    
-    public function updateProject($project){
-        $this->project=$project;
+        return $this->setProject(new Project());        
     }
 
-    public function setProject(){
+    public function setProject($project){
 
-        $data=array();
+        $data = [];
+        
         if (isset($_POST['name'])){
             $data['name']=$_POST['name'];            
-        }
-        else{
+        } else {
             $data['name']="Untitled";
         }   
         if (isset($_POST['icon'])){
@@ -39,22 +34,17 @@ class ProjectController{
         if (isset($_POST['id_owner'])){
             $data['id_owner']=$_POST['id_owner'];            
         }
-        $this->project->hydrate($data);
+        $project->hydrate($data);
+        return $project;
     }
 
-    public function addNode(){
-        require_once('./model/node.class.php');
-        $node=new Node();
-        $this->project->addNodeToList($node);        
-    }
-    
-    public function getProject(){
-        return $this->project;
+    public function addRootNode($project, $node){
+        $project->addNodeToList($node);
+        return $project;
     }
 
-    public function testProject(){
-      //  echo "test:";
-        echo $this->project->getName();
+    public function testProject($project){
+        echo " - Project: " . $project->getName();
     }
 
 

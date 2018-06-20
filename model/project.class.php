@@ -38,7 +38,7 @@
         }
         
         public final function addNodeToList($newNode) {
-            $this->node_list[$newNode->getNodePath() . '.' . $newNode->getIdChild()] = $newNode;
+            $this->node_list[] = $newNode;
         }
         
         /* Getter */

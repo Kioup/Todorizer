@@ -1,43 +1,39 @@
 <?php
 
-    $projectList=array();
-    //var_dump($_SESSION);
+    $projectList = [];
 
     require 'model/node.class.php';
     require 'model/project.class.php';
     require 'controls/projectController.class.php';
+    require 'controls/nodeController.class.php';
+
+    $projectController = new ProjectController();
+    $nodeController = new NodeController();
 
 
-    if (isset($_GET) && isset($_GET['co'])) {
-        if ($_GET['co'] == 'true') $_SESSION['user'] = true;
-        if ($_GET['co'] == 'false') {
-            unset($_SESSION['user']);
-            unset($_SESSION['projectList']);
+    if (isset($_POST) && isset($_POST['page'])) {
+        //var_dump($_POST);
+        switch ($_POST['page']) {
+            case 'connect':
+                $_SESSION['user'] = true;
+                break;
+            case 'deco':
+                unset($_SESSION['user']);
+                unset($_SESSION['projectList']);
+                session_destroy();
+                session_start();
+                $page = 'project.php';
+                break;
+            default:
+                $page = $_POST['page'];
         }
     }
 
-
-    $projectController=new ProjectController();
-
-    if (isset($_SESSION['projectList'])){
-       // var_dump($_SESSION['projectList']);
-        $projectList=unserialize($_SESSION['projectList']);   
-        $projectName=$_POST['name'];
-        $projectList[0]->setName($projectName);
-        $projectController->updateProject($projectList[0]);     
+    if (isset($_SESSION['user'])) {
+        include_once('./controls/loggedController.php');
+    } else {
+        include_once('./controls/loggoutController.php');
     }
-    else{
-        $projectController->addProject(); // création d'un nouveau projet vide
-        $projectList=[$projectController->getProject()];      
-    }
-
-    $_SESSION['projectList']=serialize($projectList);
-    //var_dump($_SESSION);
-    $projectController->testProject();
-
-   // var_dump($projectController);
-    $page="project.php";
-
 
 
 ?>

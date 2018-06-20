@@ -15,6 +15,7 @@
         private $nb_children;
         private $priority;
         private $progress;
+        private $node_list;
         
         /* Setter */
         
@@ -51,6 +52,14 @@
         public final function setProgress($newProgress) {
             $this->progress = $newProgress;
         }
+        public final function setNodeList($newNodeList) {
+            $this->node_list = $newNodeList;
+        }
+        
+        public final function addNodeToList($newNode) {
+            $this->node_list[] = $newNode;
+        }
+        
         
         /* Getter */
         
@@ -89,6 +98,9 @@
         }
         public final function getProgress() {
             return $this->progress;
+        }
+        public final function getNodeList() {
+            return $this->node_list;
         }
 
 

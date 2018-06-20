@@ -5,13 +5,17 @@
     }
 
 
+    if (isset($_SESSION['user'])) {
+        $page = "index.php";
+    } else {
+        $page = "project.php";
+    }
 
-    $page = "index.php";
 
-
-    if (isset($_POST) && isset($_POST['page'])) $page = $_POST['page'];
+    
 
     include('controls/controller.php');
+    
     
     include('assets/header.php');
 
@@ -29,8 +33,8 @@
 
 
 ?>
-        
-<div class="container">
+
+<div class="container" id="prout-<?php echo $page; ?>">
     
 <?php
 
