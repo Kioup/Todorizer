@@ -15,9 +15,12 @@
         private $nb_children;
         private $priority;
         private $progress;
-        private $node_list;
         
         /* Setter */
+        
+        public final function setId($newId) {
+            $this->id = $newId;
+        }   
         
         public final function setDescription($newDescription) {
             $this->description = $newDescription;

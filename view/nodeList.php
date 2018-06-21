@@ -1,22 +1,17 @@
 
-    --><main>
+--><main>
         <section>
             <div class="titre">
-                <h2>Projets</h2>
+                <h2> <?php echo $project->getName(); ?></h2>
 
                 <?php
-
-
-                    echo "<br>".$project->getName();
                     foreach ($project->getNodeList() as $node){
-                        echo "<br>- ".$node->getTitle();    
+                        echo "<BR>".$node->getTitle();
                     }
-
                 ?>
 
             </div>
-        </section>
-        <section>
+        </section><section>
             <div class="titre">
                 <h2>Notifications</h2>
             </div>

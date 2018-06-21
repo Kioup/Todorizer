@@ -1,12 +1,12 @@
-<?php
+ <?php
 
 class ProjectController {
 
     private $project;
 
     public function __construct(){
-        require_once('./model/project.class.php');
-        require_once('./model/node.class.php');
+        require_once(__MODELROOT__ . 'project.class.php');
+        require_once(__MODELROOT__ . 'node.class.php');
     }
 
     public function addProject(){        
@@ -38,8 +38,23 @@ class ProjectController {
         return $project;
     }
 
-    public function addRootNode($project, $node){
-        $project->addNodeToList($node);
+    public function addNode($project, $node){
+        $id = (count($project->getNodeList()) + 1);
+        $node->setId($id);
+        return $this->updateNode($project, $node, $id);
+    }
+    
+    public function updateNode($project, $node, $id) {
+        var_dump($_POST);
+        echo "<br>";
+        echo "<br>";
+        var_dump($project->getNodeList());
+        echo "<br>";
+        var_dump($id);
+        $project->addNodeToList($node, $id);
+        echo "<br>";
+        echo "<br>";
+        var_dump($project->getNodeList());
         return $project;
     }
 

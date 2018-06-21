@@ -1,17 +1,18 @@
     <aside class="menu">
         <a href="">
-            <i class="fa fa-user"></i>
+            <span><i class="fa fa-user"></i></span>
+            <p>Profil</p>
         </a>
-        <a href="/page/project.php">
-            <i class="fa fa-folder"></i>
+        <a href="<?php $url->get('project.php'); ?>">
+            <span><i class="fa fa-folder"></i></span>
+            <p>Projet</p>
+        </a>
+        <a href="<?php $url->get('index.php'); ?>">
+            <span><i class="fas fa-home"></i></span>
+            <p>Accueil</p>
         </a>
         <a href="">
-            <i class="fa fa-user"></i>
-        </a>
-        <a href="">
-            <i class="fas fa-home"></i>
-        </a>
-        <a href="">
-            <i class="fas fa-list-ul"></i>
+            <span><i class="fas fa-filter"></i></span>
+            <p>Filtrer</p>
         </a>
     </aside><!--

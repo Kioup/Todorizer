@@ -1,0 +1,3 @@
+<?php
+    $page = "index.php";
+?>

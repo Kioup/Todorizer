@@ -12,7 +12,8 @@
         private $node_list;
         
         public function __construct () {
-            require_once('./model/node.class.php');
+            
+            require_once(((isset($_POST['ajax'])) ? '.' : '') . './model/node.class.php');
             $this->node_list = [];
         }
         
@@ -37,8 +38,8 @@
             $this->node_list = $newNodeList;
         }
         
-        public final function addNodeToList($newNode) {
-            $this->node_list[] = $newNode;
+        public final function addNodeToList($newNode, $id) {
+            $this->node_list[$id] = $newNode;
         }
         
         /* Getter */
@@ -63,6 +64,9 @@
         }
         public final function getNodeList() {
             return $this->node_list;
+        }
+        public final function getNode($id) {
+            return $this->node_list[$id];
         }
         
         /* Hydratation */

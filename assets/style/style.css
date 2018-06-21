@@ -36,38 +36,58 @@ main .message h1 {
 	}
 }
 
+div.container {
+    width: 100%; 
+    height: 100vh;
+}
+
 /* aside, menu latéral */
 
 aside.menu {
-    width: 8%;
+    width: 250px;
     min-height: 100vh;
     background-color: #333333;
-    float: left;
+    position: fixed;
     text-align: center;
+    padding: 50px 0;
 }
 
 aside.menu a {
     display: inline-block;
-    font-size:2em;
-    border-radius: 50%;
-    width: 80px;
-    height: 80px;
-    line-height: 80px;
-    padding: 10px;
-    margin: auto;
+    text-align: center;
+    width: 100%;
     color: white;
+    text-decoration: none;
+    padding: 10px 20px;
     margin: 10px 0;
+    transition: 150ms;
+}
+
+aside.menu a span {
+    display: inline-block;
+    font-size:1.5em;
+    margin-right: 10px;
+    float: left;
+    transform: translateY(50%);
+    margin-top: -0.7em;
+}
+
+aside.menu a p {
+    display: inline-block;
+    font-family: "comfortaa", Arial, Helvetica, sans-serif;
 }
 
 aside.menu a:hover {
-    background-color: black;
+    background-color: white;
+    color: black;
 }
 
 /* header, en-tête */
 
 header, main {
     display: inline-block;
-    width: 92%;
+    width: calc(100% - 250px);
+    margin-left: 250px;
 }
 
 header {
@@ -129,19 +149,103 @@ header a.user span {
 
 main {
     min-height: calc(100vh - 80px);
-    background-color: #909090;    
+    background: #485563;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #29323c, #485563);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #29323c, #485563); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    
+    
 }
 
 section {
     min-height: 150px;
     margin: 60px 0;
+    width: 40%;
+    display: inline-block;
     padding: 60px;
 }
 
 div.titre h2 {
-    font-size: 2.5em;
+    font-size: 1.5em;
     color: white;
+    display: inline-block;
+    vertical-align: middle;
     font-family: "comfortaa", Arial, sans-serif;
+}
+
+div.titre h2:after {
+    content : "";
+    display: block;
+    height: 1px;
+    width: 100%;
+    margin: 15px 0;
+    background: white;
+    background: -webkit-linear-gradient(to right, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0));  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, rgba(0, 0, 0, 0), white, rgba(0, 0, 0, 0)); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */   
+}
+
+div.titre span {
+    font-size: 5em;
+    color: white;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 20px;
+}
+
+main div.contenu form.log {
+    width: 50%;
+}
+
+main div.contenu form.log input[type="text"], main div.contenu form.log input[type="email"], main div.contenu form.log input[type="password"] {
+    width: 100%;
+    line-height: 1.5em;
+    font-size: 1.2em;
+    margin: 10px 0;
+    color: black;
+    display: inline-block;
+    font-family: "Roboto Mono", Arial, sans-serif;
+    vertical-align: middle;
+}
+
+main div.contenu form.log input[type="submit"] {
+    margin: 10px 0;
+    background: #545659;
+    font-family: "Roboto Mono";
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    width: 100%;
+    border: none;
+    padding: 10px 0;
+    font-size: 1.5em;
+}
+
+main div.contenu + div.annexe {
+    display: flex;
+    width: 50%;    
+    margin: 10px 0;
+    color: white;
+    justify-content: space-between;
+}
+
+main div.contenu + div.annexe > a {
+    background: #545659;
+    text-decoration: none;
+    font-family: "Roboto Mono";
+    border-radius: 5px;
+    text-align: center;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1.2em;
+}
+
+main div.contenu + div.annexe span {
+    display: inline-block;
+    font-size: 2em;
+}
+
+main div.contenu + div.annexe span a i{
+    color: white;
 }
 
 /*main, todolist */
@@ -183,7 +287,7 @@ main div.list form {
 }
 
 main div.list form input[type="text"]{
-    width: calc(100% - 100px);
+    width: calc(100% - 50px);
     line-height: 1.5em;
     font-size: 1.2em;
     margin: 10px 0;
@@ -194,8 +298,13 @@ main div.list form input[type="text"]{
     
 }
 
+main div.list div.tache, main div.list div.new {
+    background-color: #545659;
+    padding: 5px 10px;
+}
+
 main div.list form div.alert {
-    width: calc(100% - 100px);
+    width: calc(100% - 50px);
     color: white;
     position: relative;
     background-color: #fc6271;
@@ -230,8 +339,36 @@ main div.list form input[type="text"] + a,  main div.list form input[type="text"
     text-align: center;
 }
 
-span.trash {
+input.jscolor {
+    border: 2px solid gray;
+    border-radius: 3px;
+    margin: 0 20px;
+    height: 40px;
+    width: 60px;
+}
+
+span.trash, span.deploi, span.pen {
     cursor: pointer;
 }
- 
+
+/* partie développé de la classe tache */
+
+main div.list form div.tache div.develop {
+    display: none;
+    padding: 10px;
+    color : white;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+}
+
+main div.list form div.tache div.develop textarea {
+    width: 100%;
+    margin: 10px 0;
+}
+
+main div.list form div.tache div.develop div {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    font-size: 1.5em;
+}
 

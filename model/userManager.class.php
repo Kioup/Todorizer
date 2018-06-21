@@ -2,10 +2,12 @@
 
     class UserManager {
         
+        private $db;
+        
         public function __construct() {
             require_once('./model/db.class.php');
             $connection = new Connection();
-            $db = $connection->get_connection();
+            $this->db = $connection->get_connection();
         }
         
         

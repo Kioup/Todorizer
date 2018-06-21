@@ -2,11 +2,11 @@
 
 class NodeController{
 
-
-    
     public function __construct(){
-        require_once('./model/node.class.php');       
-        require_once('./model/project.class.php');       
+        $dir = './model/';
+        if (isset($_POST['ajax'])) $dir = '.' . $dir;
+        require_once($dir.'project.class.php');
+        require_once($dir.'node.class.php');
     }
 
     public function createNode(){        
@@ -20,12 +20,15 @@ class NodeController{
         if (isset($_POST['title'])){
             $data['title'] = $_POST['title'];
         }
-        $data['parent_node'] = $node_path;
+        if (isset ($_POST['description'])){
+            $data['description']=$_POST['description'];
+        }
+        $data['node_path'] = $node_path;
         $node->hydrate($data);
         return $node;
     }
 
-    public function addChildNode(&$parentNode, $childNode){
+    public function addChildNode($parentNode, $childNode){
         $parentNode->addNodeToList($childNode);
         return $parentNode;
     }

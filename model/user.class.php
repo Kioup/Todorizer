@@ -12,6 +12,9 @@
         
         /* Setter */
         
+        public final function setid($id) {
+            $this->id = $id;
+        }	
         public final function setEmail($newEmail) {
             $this->email = $newEmail;
         }	

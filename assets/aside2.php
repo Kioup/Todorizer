@@ -1,8 +1,10 @@
     <aside class="menu">
-        <a href="/page/connexion.php">
-            <i class="fa fa-user"></i>
+        <a href="<?php $url->get('connexion.php'); ?>">
+            <span><i class="fa fa-user"></i></span>
+            <p>Identification</p>
         </a>
-        <a href="/page/index.php">
-            <i class="fas fa-home"></i>
+        <a href="<?php $url->get('project.php'); ?>">
+            <span><i class="fas fa-home"></i></span>
+            <p>Accueil</p>
         </a>
     </aside><!--
