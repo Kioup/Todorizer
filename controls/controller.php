@@ -2,27 +2,15 @@
 
     $projectList = [];
 
-//    require_once('model/node.class.php');
-//    require 'model/project.class.php';
-//    require 'controls/projectController.class.php';
-//    require 'controls/nodeController.class.php';
     require 'model/user.class.php';
-    //require 'model/nodeManager.class.php';
 
-//    $projectController = new ProjectController();
-//    $nodeController = new NodeController();
-/* 
-    $nodeManager = new NodeManager();
-    var_dump($nodeManager-> extract_all_test());
- */
-    // temp debug: 
 
+
+    // Dev user: 
     $user = new User();
-    $data = [];
-    $data['id'] = 3;
-    $date['name'] = "toto";
+    $data = ['id' => 3, 'name' => 'toto'];
     $user->hydrate($data);
-    /////
+    //**
 
     if (isset($_POST) && isset($_POST['page'])) {
         switch ($_POST['page']) {
@@ -39,27 +27,32 @@
             default:
                 $page = $_POST['page'];
         }
-        if (in_array($_POST['page'], ['connect','deco'])) header('Location:index.php');
+        //if (in_array($_POST['page'], ['connect','deco'])) header('Location:index.php');
     }
 
+    //User controller
     if (isset($_SESSION['user'])) {
-        $user=unserialize($_SESSION['user'] );
-        $id_user=$user->getId();
+        $user = unserialize($_SESSION['user'] );
+        $id_user = $user->getId();
 
         require_once(__CONTROLROOT__ . 'loggedController.php');
         $loggedController=new LoggedController($id_user);
 
         if (isset($_POST['view'])){
-            if ($_POST['view']=="nodeList"){                           
-                $loggedController->displayProjectNodes($_POST['projectId'] );
-            }        
-        }
-        else{
+            switch ($_POST['view']){
+                case 'nodeList':
+                    $loggedController->displayProjectNodes($_POST['projectId']);                  
+                    break;
+                case 'childNodeList':
+                    $loggedController->displayChildNodes($_POST['projectId'], $_POST['nodePath']);
+                    break;                             
+            }       
+        } else {
             $loggedController->displayAllProjects();
         } 
 
+    //NoUser controller
     } else {
-
         include_once(__CONTROLROOT__ . 'loggoutController.php');
     }
 

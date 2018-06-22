@@ -42,6 +42,11 @@
             $this->node_list[$id] = $newNode;
         }
         
+        public final function removeNode($id) {
+            $tab = $this->node_list;
+            unset($tab[$id]);
+        }
+        
         /* Getter */
         
         public final function getId() {

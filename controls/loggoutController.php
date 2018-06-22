@@ -15,63 +15,58 @@
     
     $projectController = new ProjectController();
     $nodeController = new NodeController();
-    
-    //var_dump($_POST);
 
+    //Load project session
     if (isset($_SESSION['current_project'])) {
-      //  var_dump($_SESSION['current_project']);
+        
         $currentProject = unserialize($_SESSION['current_project']);
 
         if (isset($_POST['name'])) {            
             $currentProject->setName($_POST['name']);
         }  
-        
-    } else {        
-        $currentProject = $projectController->addProject(); // création d'un nouveau projet vide       
-    }
-
     
-
-    // debug:
-    if (isset($_GET['node_path'])){
-        $_SESSION['node_path']=$_GET['node_path'];
-        echo $_SESSION['node_path'];
-    } else {
-        $_SESSION['node_path']=null;
+    //Create new project
+    } else {   
+        $currentProject = $projectController->addProject(); // création d'un nouveau projet vide
     }
 
+
+
+    //Node title
+    if (isset($_POST['title'])) {
+        
+        //Update title
+        if(isset($_POST['taskUpdate'])) {
+            $id = $_POST['taskUpdate'];
+            $updateNode = $currentProject->getNodeList()[$id];
+            $updateNode->setTitle($_POST['title']);
+            $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
+        
+        //New title -> new node
+        } else {
+            $newNode = $nodeController->CreateNode($currentProject);
+            $newNode = $nodeController->setNode($newNode,$_SESSION['node_path']);
+            $currentProject = $projectController->addNode($currentProject, $newNode);
+            /* Variable PHP to js */
+            if (isset($_POST['ajax'])) echo '_*_*_' . count($currentProject->getNodeList());
+        }
+    } 
+
+    //Update description
     if (isset($_POST['description']) && isset($_POST['taskUpdate'])) {
-        echo "newDesc";
         $id = $_POST['taskUpdate'];
         $updateNode = $currentProject->getNode($id);
         $updateNode->setDescription($_POST['description']);
         $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
     }
 
-    if (isset($_POST['title'])) {
+    if (isset($_POST['id_to_remove'])) {
         
-        if(isset($_POST['taskUpdate'])) {
-            echo "newTitle";
-            $id = $_POST['taskUpdate'];
-            $updateNode = $currentProject->getNodeList()[$id];
-            $updateNode->setTitle($_POST['description']);
-            $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
-        } else {
-            // création d'un nouveau noeud enfant:
-            $newNode = $nodeController->CreateNode($currentProject);
-            $newNode = $nodeController->setNode($newNode,$_SESSION['node_path']);
-            $currentProject = $projectController->addNode($currentProject, $newNode);
-            echo '_*_*_' . count($currentProject->getNodeList());
-        }
-     
-        
-        //var_dump($currentProject);
-    } 
+    }
 
+    //Save session project
     $_SESSION['current_project'] = serialize($currentProject);    
 
-    //$page = "project.php";
 
-    $url->showHeader();
-    
+    if (!isset($_POST['ajax'])) $url->showHeader();
 ?>

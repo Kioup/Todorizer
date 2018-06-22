@@ -8,10 +8,10 @@
             </div>
             <div class="contenu">
                 <form class="log">
-                    <input type="text" placeholder="Prenom">
-                    <input type="text" placeholder="Nom">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Mot de passe">
+                    <input type="text" placeholder="Prenom" name="prenom">
+                    <input type="text" placeholder="Nom" name="nom">
+                    <input type="email" placeholder="Email" name="email">
+                    <input type="password" placeholder="Mot de passe" name="password">
                     <input type="submit" value="connexion">
                 </form>
             </div>

@@ -7,6 +7,7 @@ $(document).ready(function(){
     
     updateNode($(".tache").children("input[type=text]"));
     updateNode($(".tache").find("textarea"));
+    removeNode($(".tache").find(".trash"));
 
     $( ".deploi" ).click(function() {
         var icone = $(this).parent().find(".deploi").find("i");
@@ -30,13 +31,17 @@ function addNode(t) {
 function updateNode(e) {
     ajaxUpdateNode(e);
 }
+function removeNode(e) {
+    ajaxRemoveNode(e);
+}
+
 
 
 function createTask(e){
         e.preventDefault();
         var input = $("a.newPro").prev()[0];
         var block = $(this).parent();
-        console.log(block);
+        //console.log(block);
         if (input.value != "" || input.value.length != 0){
             var titre = input.value;
             addNode(titre);
@@ -46,6 +51,7 @@ function createTask(e){
             input.focus();
             updateNode($(".tache").last().children(":first"));
             updateNode($(".tache").last().find("textarea"));
+            removeNode($(".tache").last().find(".trash"));
             $(".trash").last().on("click", rmTask);
             $( ".deploi" ).last().click(function() {
                 var icone = $(this).parent().find(".deploi").find("i");

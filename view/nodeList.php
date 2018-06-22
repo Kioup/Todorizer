@@ -1,19 +1,35 @@
-
 --><main>
         <section>
-            <div class="titre">
-                <h2> <?php echo $project->getName(); ?></h2>
 
-                <?php
-                    foreach ($project->getNodeList() as $node){
-                        echo "<BR>".$node->getTitle();
+            <?php
+            echo '<div class="titre"><h2>';
+            echo $project->getName()." (".$project->getId().") </h2>";
+            echo '<ul>';
+            foreach ($project->getNodeList() as $node){                
+                // enfants niveau 1:
+                if (strlen ($node->getNodePath())==3){
+                   // echo "<BR> - ".$node->getTitle()." ".$node->getNodePath();
+                    include 'view/node.php';
+
+                    // enfants niveau 2:
+                    echo '<div style="padding-left:4em; font-size:0.9em;"><ul >';
+                    foreach ($project->getNodeList() as $subNode){                         
+                         if( (strlen ($subNode->getNodePath())==5) && (stripos($subNode->getNodePath(), $node->getNodePath()) ===0) ){        
+                            //echo "<BR> -----  ".$subNode->getTitle()." ".$subNode->getNodePath()." ".stripos($subNode->getNodePath(), $node->getNodePath());
+                            include 'view/subNode.php';
+                        }                         
                     }
-                ?>
+                    echo "</ul></div>";
+                }            
+            } 
+            echo "</ul>"; 
+            echo '</div>';
+?>
 
-            </div>
-        </section><section>
-            <div class="titre">
-                <h2>Notifications</h2>
-            </div>
-        </section>
-    </main>
+
+</section><section>
+<div class="titre">
+<h2>Notifications</h2>
+</div>
+</section>
+</main>

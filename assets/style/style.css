@@ -259,8 +259,8 @@ main div.entete {
 
 main div.entete input[type="text"] {
     width: 50%;
-    line-height: 1.5em;
-    font-size: 1.2em;
+    padding: 2px;
+    font-size: 1em;
     color: black;
     font-family: "Roboto Mono", Arial, sans-serif;
 }

@@ -13,17 +13,13 @@ $().ready(function(){
                 dataType : 'html',
                 success : function(gna){
                     /*Debug */
-                    $('body').before(gna);
-                },
-                error : function(e){
-                    console.log(e);
+                    //$('body').before(gna);
                 }
             });
         });
     }
     
     add = function(t) {
-        console.log('eve :' + t);
         $.ajax({
             url : 'controls/loggoutController.php',
             type : 'post',
@@ -42,6 +38,22 @@ $().ready(function(){
         }); 
     }
     
+    remove = function(id) {
+        $.ajax({
+            url : 'controls/loggoutController.php',
+            type : 'post',
+            data : {
+                id_to_remove: id,
+                ajax: true
+            },
+            dataType : 'html',
+            success : function(gna){
+                /* Debug */
+                //$('body').before(gna);
+            }
+        });
+    }
+    
     update = function(id,type,value) {
         var data = {
             taskUpdate: id,
@@ -55,7 +67,8 @@ $().ready(function(){
             data : data,
             dataType : 'html',
             success : function(gna){
-                $('body').before(gna);
+                /* Debug */
+                //$('body').before(gna);
             }
         }); 
     }
@@ -67,6 +80,14 @@ $().ready(function(){
 
 function ajaxAddNode(t) {
     add(t);
+}
+function ajaxRemoveNode(elem) {
+    elem.click(function(e){
+        var e = $(e.target);
+        var child = e.parents('.tache').children('input[type=hidden]')[0];
+        var id = child.value;
+        remove(id);
+    });
 }
 function ajaxUpdateNode(elem) {
     elem.on('keyup',function(e){

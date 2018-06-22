@@ -30,11 +30,11 @@ class NodeManager {
         );
     }
 
-    public function extract_allNodes() {
+/*     public function extract_allNodes() {
         $request = $this->db->query("SELECT * FROM node");
         $request = $request->fetchall(PDO::FETCH_ASSOC);
         return $request;
-    }
+    } */
 
     public function extract_ProjectNodes($project){
         $id_project=$project->getId();

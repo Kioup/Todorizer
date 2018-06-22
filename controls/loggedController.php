@@ -29,11 +29,40 @@ Class LoggedController{
     public function displayProjectNodes($id_project){
         $project=$this->projectManager->extract_Project($id_project);
         $nodeList=$this->nodeManager->extract_ProjectNodes($project);
-        $project->setNodeList($nodeList);
+
+        $sortedNodeList=$this->sortNodeList($nodeList);
+        $project->setNodeList($sortedNodeList);
+        
+       // $project->setNodeList($nodeList);
         $this->url->showHeaderCON();
         include 'view/nodeList.php'; 
     }
 
+    public function displayChildNodes($id_project,$currentNodePath){
+        $nb_children=null;
+        $project=$this->projectManager->extract_Project($id_project);
+        $nodeList=$this->nodeManager->extract_ProjectNodes($project);
+
+        // conversion de la liste de noeuds en tableau associatif:
+        $sortedNodeList=$this->sortNodeList($nodeList);
+
+        // récup du noeud courrant:
+        $currentNode=$sortedNodeList[$currentNodePath];
+
+        // récup des noeuds enfants de la génération suivante:
+        $nb_children=$currentNode->getNbChildren();
+
+        $this->url->showHeaderCON();        
+        include 'view/childNodeList.php';      
+    }
+
+    private function sortNodeList($nodeList){
+        $sortedNodeList=array();
+        foreach ($nodeList as $node){
+            $sortedNodeList[$node->getNodePath()]=$node;
+        }
+        return $sortedNodeList;
+    }
 
 }
 

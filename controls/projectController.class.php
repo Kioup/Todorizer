@@ -20,7 +20,7 @@ class ProjectController {
         if (isset($_POST['name'])){
             $data['name']=$_POST['name'];            
         } else {
-            $data['name']="Untitled";
+            $data['name']="Projet sans nom";
         }   
         if (isset($_POST['icon'])){
             $data['icon']=$_POST['icon'];            
@@ -45,16 +45,7 @@ class ProjectController {
     }
     
     public function updateNode($project, $node, $id) {
-        var_dump($_POST);
-        echo "<br>";
-        echo "<br>";
-        var_dump($project->getNodeList());
-        echo "<br>";
-        var_dump($id);
         $project->addNodeToList($node, $id);
-        echo "<br>";
-        echo "<br>";
-        var_dump($project->getNodeList());
         return $project;
     }
 
