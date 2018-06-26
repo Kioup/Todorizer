@@ -15,7 +15,7 @@ echo '<input type="text" placeholder="Nom du projet id="projectName" name="name"
 </div>
 <div class="list">
     <form method="POST" action="">
-    <div class="form-block">
+    <div class="form-block block-task" id="block-task">
         <input type="hidden" id="nodeID" value="<?php echo $currentNode->getId(); ?>">
             <?php
 
@@ -47,15 +47,15 @@ echo '<input type="text" placeholder="Nom du projet id="projectName" name="name"
                 for ($i = 1; $i <= $nb_children; $i++) {
                     $currentChildNode=$sortedNodeList[$currentNodePath.".".$i];
                     $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ;                     
-                    
+                   
                     include 'view/node.php';  
                 }
             }
         ?>
-    </div>
-    <div class="form-block new">
-        <input type="text" placeholder="Nouveau"><!--
-        --><a href="#" class="newPro"><i class="fas fa-plus-square"></i></a>  
+            <div class="form-block new" id="nodeList">
+                <input type="text" placeholder="Nouveau"><!--
+                --><a href="#" class="newPro"><i class="fas fa-plus-square"></i></a>  
+            </div>
     </div>
         <input type="hidden" name="id_project" value="0">
         <input type="hidden" name="ctrl" value="node">

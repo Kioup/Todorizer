@@ -15,7 +15,8 @@ $().ready(function(){
                 dataType : 'html',
                 success : function(gna){
                     /*Debug */
-                    //$('body').before(gna);
+                    $('body').before(gna);
+                    console.log(this.data);
                 }
                 
             });
@@ -25,6 +26,7 @@ $().ready(function(){
     
     add = function(t) {
         console.log($("#projectRoot").val());
+        console.log(t);
         $.ajax({
             url : 'controls/ajaxController.php',
             type : 'post',
@@ -39,6 +41,11 @@ $().ready(function(){
                 /*Debug */
                 $('body').before(gna);
                 console.log(this.data);
+                var pos = gna.indexOf("_*_*_");
+                var id = gna.slice(pos + 5).split(":");
+                $('.tache').last().append("<input type='hidden' name='taskUpdate' value='"+id[0]+"'>");
+                var href = "redirect.php?projectId=" + $("#projectID").val() + "&view=nodeList&nodePath="+id[1];
+                $('.newNodeList').last().attr("href",href);
             }
         });
     };
@@ -54,7 +61,8 @@ $().ready(function(){
             dataType : 'html',
             success : function(gna){
                 /* Debug */
-                //$('body').before(gna);
+                $('body').before(gna);
+                console.log(this.data);
             }
         });
     };
@@ -72,7 +80,8 @@ $().ready(function(){
             dataType : 'html',
             success : function(gna){
                 /*Debug */
-                //$('body').before(gna);
+                $('body').before(gna);
+                console.log(this.data);
             }
         });
     };     
@@ -84,6 +93,7 @@ function ajaxAddNode(t) {
 }
 function ajaxRemoveNode(elem) {
     elem.click(function(e){
+        console.log(e);
         if (window.confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) { 
             var e = $(e.target);
             var child = e.parents('.tache').children('input[type=hidden]')[0];
@@ -96,6 +106,7 @@ function ajaxRemoveNode(elem) {
 function ajaxUpdateNode(elem) {
     elem.focusout(function(e){
         var e = $(e.target);
+        console.log(e);
         var value = e[0].value;
         var type = e.data('type');
         console.log(e.parents('.tache'));

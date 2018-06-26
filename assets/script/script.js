@@ -26,7 +26,39 @@ $(document).ready(function(){
         }
     });
 
+    $("div.edit div.contenu div span.fill").on("click", showPopup());
+    $("div.overlay").on("click", hidePopup());
+
 });
+
+function showPopup(){
+    var overlay = $("div.overlay");
+
+    overlay.addClass("in");
+
+    var popup = $("div.popup");
+
+    if (popup.hasClass("out")){
+
+        popup.removeClass("out");
+        popup.addClass("in");
+    }
+}
+
+function hidePopup(){
+    var overlay = $("div.overlay");
+    if (overlay.hasClass("in")){
+
+        overlay.removeClass("in");
+    }
+    var popup = $("div.popup");
+
+    if (popup.hasClass("in")){
+        
+        popup.removeClass("in");
+        popup.addClass("out");
+    }
+}
 
 function addNode(t) {
     ajaxAddNode(t);
@@ -46,7 +78,8 @@ function createTask(e){
         if (input.value != "" || input.value.length != 0){
             var titre = input.value;
             addNode(titre);
-            $("#block-task").append("<div class='tache'><label class='container'><input type='checkbox'><span class='checkmark'></span></label><input type='text' value='" + titre + "' name='title' data-type='title'><span class='deploi'><i class='fas fa-angle-down'></i></span><div class='develop'><fieldset><legend>description</legend><textarea row='4' placeholder='Entrez un texte descriptif' data-type='description'></textarea></fieldset><div><span class='trash'><i class='fas fa-trash'></i></span><span class='pen'><i class='fas fa-pencil-alt'></i></span></div></div></div>");
+            $("#block-task").append("<div class='tache'><label class='container'><input type='checkbox'><span class='checkmark'></span></label><input type='text' value='" + titre + "' name='title' data-type='title'><span class='deploi'><i class='fas fa-angle-down'></i></span><div class='develop'><fieldset><legend>description</legend><textarea row='4' placeholder='Entrez un texte descriptif' data-type='description'></textarea></fieldset> <div><span class='trash'><i class='fas fa-trash'></i></span><a href='' class='newNodeList'><span class='pen'><i class='fas fa-pencil-alt'></i></span></a></div>");
+            $("#block-task").append($(".form-block.new"));
             $("div.alert").remove();
             input.value = "";
             input.focus();

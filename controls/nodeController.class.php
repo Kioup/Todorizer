@@ -20,9 +20,16 @@ class NodeController{
         if (isset($_POST['title'])){
             $data['title'] = $_POST['title'];
         }
+        if (isset($_POST['id_parent'])){
+            $data['id_parent'] = $_POST['id_parent'];
+        }
         if (isset ($_POST['description'])){
             $data['description']=$_POST['description'];
         }
+        if (isset ($_POST['id_project'])){
+            $data['id_project']=$_POST['id_project'];
+        }
+        $data['id_child'] = substr(strrchr($node_path,'.'),1);
         $data['node_path'] = $node_path;
         $node->hydrate($data);
         return $node;

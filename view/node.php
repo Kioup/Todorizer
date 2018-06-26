@@ -30,8 +30,8 @@
 
 // affichage noeuds niveau 2:                  
                     $nb_subChildren=$currentChildNode->getNbChildren();
-               
                     if ($nb_subChildren){
+                        
                        echo '<ul style="padding-left:5em;">';
                        for ($j = 1; $j <= $nb_subChildren; $j++) {
                            $currentChildNode=$sortedNodeList[($currentNodePath.".".$i).".".$j];
@@ -48,5 +48,5 @@
             echo "</div>";
     /// fin niveau 2
 
-echo "</div>";
+
 ?>

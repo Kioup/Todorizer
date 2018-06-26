@@ -18,4 +18,9 @@
                 </form>
             </div>
         </div>
-    </main>
+    </main><!--
+--><div class="overlay"></div><!--
+--><div class="popup">
+        <input class="jscolor {onFineChange:'update(this)'}" value="ffffff">
+        <p class="picker" style="">
+</div>

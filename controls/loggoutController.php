@@ -4,8 +4,7 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    
-    var_dump($_POST);
+
     if (!defined('__MODELROOT__')) define('__MODELROOT__', '../model/');
     if (!defined('__CONTROLROOT__')) define('__CONTROLROOT__', '');
 
@@ -49,7 +48,7 @@
             $newNode = $nodeController->setNode($newNode,$_SESSION['node_path']);
             $currentProject = $projectController->addNode($currentProject, $newNode);
             /* Variable PHP to js */
-            if (isset($_POST['ajax'])) echo '_*_*_' . max(array_keys($currentProject->getNodeList()));
+            if (isset($_POST['ajax'])) echo '_*_*_' . count($currentProject->getNodeList());
         }
     } 
 

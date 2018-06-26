@@ -31,8 +31,12 @@
 
     //// niveau 2:
         echo '<div style="padding-left:5em;">';
-            foreach ($project->getNodeList() as $currentChildNode){                         
-                if( (strlen ($currentChildNode->getNodePath())==5) && (stripos($currentChildNode->getNodePath(), $node->getNodePath()) ===0) ){        
+
+            foreach ($project->getNodeList() as $currentChildNode){       
+
+                $ChildNodePathArray=explode('.', $currentChildNode->getNodePath());
+
+                if( (count ($ChildNodePathArray)==3) && (stripos($currentChildNode->getNodePath(), $node->getNodePath()) ===0) ){        
                     
                     $childNodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ; 
                     

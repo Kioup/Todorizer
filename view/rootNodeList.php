@@ -22,14 +22,13 @@ echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name
             $NodePathArray=explode('.', $node->getNodePath());
             
             // enfants niveau 1:
-            // if (strlen ($node->getNodePath())==3){
-            if (sizeof ($NodePathArray)==2){
+            if (count ($NodePathArray)==2){                
                 include 'view/rootNode.php';    
             }
         }
         ?>
     </div>
-    <div class="form-block new">
+    <div class="form-block new" id="rootNodeList">
         <input type="text" placeholder="Nouveau"><!--
         --><a href="#" class="newPro"><i class="fas fa-plus-square"></i></a>  
     </div>

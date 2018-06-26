@@ -37,7 +37,7 @@ class ProjectController {
     }
 
     public function addNode($project, $node){
-        $id = (max(array_keys($project->getNodeList())) + 1);
+        $id = (count($project->getNodeList()) + 1);
         $node->setId($id);
         return $this->updateNode($project, $node, $id);
     }

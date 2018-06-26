@@ -29,7 +29,9 @@ class NodeManager {
                 'id_child' => $node->getIdChild(),
             ]
         );
-        var_dump($create);
+        //var_dump($create);
+        $id = $this->db->lastInsertId();
+        return $id;
     }
 
     public function findRootBrothers($id_project){

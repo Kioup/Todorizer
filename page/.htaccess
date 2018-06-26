@@ -1,4 +1,0 @@
-Options +FollowSymLinks -MultiViews
-RewriteEngine On
-
-RewriteRule ^(.*)$ /redirect.php?page=$1 [R=301,NC,L]
