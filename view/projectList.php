@@ -27,7 +27,8 @@
             ?>
                 <li  class="new">
                     <form method="POST" action="">
-                        <input type="hidden" id="projectRoot" value="0">
+                        <input type="hidden" name="projectId" value=""> 
+                        <input type="hidden" name="view" value="">
                         <a href="#" onclick="this.parentNode.submit()" >
                             <p>Nouveau</p>
                             <span><i class="fas fa-folder"></i></span>

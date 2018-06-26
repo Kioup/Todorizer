@@ -5,9 +5,6 @@ require_once(__MODELROOT__ .'nodeManager.class.php');
 
 $projectManager=new ProjectManager();
 
-
-var_dump($_POST);
-
 if (isset($_POST['ajax'])){
 
     switch($_POST['ajax']){

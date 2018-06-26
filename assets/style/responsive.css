@@ -96,6 +96,36 @@
         padding: 0;
     }
 
+    div.list {
+        width:  calc(100vw - 80px);
+    }
+
+    main div.list div.tache, main div.list div.new {
+        border: none;
+        margin: 5px 0;
+        padding: 5px;
+        text-align: left;
+    }
+
+    main div.list div.tache input, main div.list div.new input {
+        margin: 0;
+        margin-left: 30px;
+        width: calc(100% - 80px);
+    }
+
+    main div.list div.tache .container input {
+        width: 1px;
+        height: 1px;
+        display: inline-block;
+        position: absolute;
+        right: 0;
+        bottom: 0;
+    }
+
+    main div.list div.tache .container .checkmark {
+        top: -20px;
+    }
+
     .dash-mobile + * {
         display: none;
     }

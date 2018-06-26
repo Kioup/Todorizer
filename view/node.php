@@ -6,17 +6,14 @@
         <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>"> 
         <input type="hidden" name="view" value="nodeList">
         <input type="hidden" name="nodePath" value="<?php echo $currentChildNode->getNodePath(); ?>">
-        <a href="#" onclick="this.parentNode.submit()" >
-            <span><?php echo "<BR>".$currentChildNode->getTitle() ." (".$currentChildNode->getNodePath(). ")";?></span>
-        </a> 
+        <input type="text" value="<?php echo $currentChildNode->getTitle(); ?>" data-type="title" >
     <span class="deploi">
         <i class="fas fa-angle-down"></i>
     </span>
     <div class="develop">
         <fieldset>
-        <legend>description</legend>
-        <textarea row="4" placeholder="Entrez un texte descriptif" data-type="description">
-        </textarea>
+        <legend>Description</legend>
+        <textarea row="4" placeholder="Entrez un texte descriptif" data-type="description"><?php echo $currentChildNode->getDescription();  ?></textarea>
         </fieldset>
         <div>
             <span class="trash"><i class="fas fa-trash"></i>
@@ -27,14 +24,14 @@
             </a>       
         </div>
     </div>
-    <input type="hidden" name="taskUpdate" value=" . $node->getId() . ">
+    <input type="hidden" name="taskUpdate" value="<?php echo $currentChildNode->getId(); ?>">
 
 <?php
 
 // affichage noeuds niveau 2:                  
                     $nb_subChildren=$currentChildNode->getNbChildren();
                
-                   if ($nb_subChildren){
+                    if ($nb_subChildren){
                        echo '<ul style="padding-left:5em;">';
                        for ($j = 1; $j <= $nb_subChildren; $j++) {
                            $currentChildNode=$sortedNodeList[($currentNodePath.".".$i).".".$j];
@@ -47,7 +44,7 @@
                        ';
                        }
                        echo '</ul>';
-                   }
+                    }
             echo "</div>";
     /// fin niveau 2
 

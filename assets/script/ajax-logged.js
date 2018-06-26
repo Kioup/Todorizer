@@ -15,28 +15,56 @@ $().ready(function(){
                 dataType : 'html',
                 success : function(gna){
                     /*Debug */
-                    $('body').before(gna);
+                    //$('body').before(gna);
                 }
                 
             });
         });
         
-    }
+    }    
     
+    add = function(t) {
+        console.log($("#projectRoot").val());
+        $.ajax({
+            url : 'controls/ajaxController.php',
+            type : 'post',
+            data : {
+                id_project: $("#projectID").val(),
+                title: t,
+                ajax: "addNode",
+                id_parent: $("#nodeID").val()
+            },
+            dataType : 'html',
+            success : function(gna){
+                /*Debug */
+                $('body').before(gna);
+                console.log(this.data);
+            }
+        });
+    };
     
-    
-    
-    
-    add = function(t) {console.log("add")};
-    
-    remove = function(id) {console.log("remove")};
+    remove = function(id) {
+        $.ajax({
+            url : 'controls/ajaxController.php',
+            type : 'post',
+            data : {
+                nodeId: id,
+                ajax: "deleteNode"
+            },
+            dataType : 'html',
+            success : function(gna){
+                /* Debug */
+                //$('body').before(gna);
+            }
+        });
+    };
     
     update = function(id,type,value) {
         $.ajax({
             url : 'controls/ajaxController.php',
             type : 'post',
             data : {
-                update: value,
+                value: value,
                 projectId: $("#projectID").val(),
                 nodeId: id,
                 ajax: type + "NodeUpdate"
@@ -44,7 +72,7 @@ $().ready(function(){
             dataType : 'html',
             success : function(gna){
                 /*Debug */
-                $('body').before(gna);
+                //$('body').before(gna);
             }
         });
     };     
@@ -70,6 +98,8 @@ function ajaxUpdateNode(elem) {
         var e = $(e.target);
         var value = e[0].value;
         var type = e.data('type');
+        console.log(e.parents('.tache'));
+        console.log(e.parents('.tache').children('input[type=hidden]'));
         var child = e.parents('.tache').children('input[type=hidden]')[0];
         var id = child.value;
         update(id, type, value);

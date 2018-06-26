@@ -12,6 +12,7 @@
         <link href="assets/style/fontawesome-all.min.css" rel="stylesheet">
         <link rel="stylesheet" type="text/css" href="assets/style/style.css" />
         <link rel="stylesheet" type="text/css" href="assets/style/responsive.css" />
+        <link rel="stylesheet" type="text/css" href="assets/style/dragula.min.css" />
         <link href="https://fonts.googleapis.com/css?family=Roboto+Mono:400,400i,500,500i,700,700i" rel="stylesheet"> 
 	</head>
     <body>

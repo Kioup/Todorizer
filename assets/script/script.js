@@ -1,3 +1,5 @@
+var drag;
+
 // Insérer du javascript dans ce fichier
 $(document).ready(function(){
 
@@ -8,6 +10,7 @@ $(document).ready(function(){
     updateNode($(".tache").children("input[type=text]"));
     updateNode($(".tache").find("textarea"));
     removeNode($(".tache").find(".trash"));
+    drag = dragula([document.getElementById("block-task")]);
 
     $( ".deploi" ).click(function() {
         var icone = $(this).parent().find(".deploi").find("i");
@@ -35,8 +38,6 @@ function removeNode(e) {
     if (ajaxRemoveNode(e)) rmTask();
 }
 
-
-
 function createTask(e){
         e.preventDefault();
         var input = $("a.newPro").prev()[0];
@@ -45,13 +46,15 @@ function createTask(e){
         if (input.value != "" || input.value.length != 0){
             var titre = input.value;
             addNode(titre);
-            block.before("<div class='tache'><label class='container'><input type='checkbox'><span class='checkmark'></span></label><input type='text' value='" + titre + "' name='title' data-type='title'><span class='deploi'><i class='fas fa-angle-down'></i></span><div class='develop'><fieldset><legend>description</legend><textarea row='4' placeholder='Entrez un texte descriptif' data-type='description'></textarea></fieldset><div><span class='trash'><i class='fas fa-trash'></i></span><span class='pen'><i class='fas fa-pencil-alt'></i></span></div></div></div>");
+            $("#block-task").append("<div class='tache'><label class='container'><input type='checkbox'><span class='checkmark'></span></label><input type='text' value='" + titre + "' name='title' data-type='title'><span class='deploi'><i class='fas fa-angle-down'></i></span><div class='develop'><fieldset><legend>description</legend><textarea row='4' placeholder='Entrez un texte descriptif' data-type='description'></textarea></fieldset><div><span class='trash'><i class='fas fa-trash'></i></span><span class='pen'><i class='fas fa-pencil-alt'></i></span></div></div></div>");
             $("div.alert").remove();
             input.value = "";
             input.focus();
+            drag.containers.push($(".tache").last());
             updateNode($(".tache").last().children("input[type=text]"));
             updateNode($(".tache").last().find("textarea"));
             removeNode($(".tache").last().find(".trash"));
+            //drag = dragula([document.getElementById("block-task")]);
             //$(".trash").last().on("click", rmTask);
             $( ".deploi" ).last().click(function() {
                 var icone = $(this).parent().find(".deploi").find("i");
@@ -73,9 +76,11 @@ function createTask(e){
         else {
             if ($("div.alert").length == 0) {
 
-                block.before( "<div class='alert'><i class='fas fa-exclamation-triangle'></i><p>Vous devez entrez un nom de tache</p></div>");
+                block.before( "<div class='alert'><i class='fas fa-exclamation-triangle'></i><p>Vous devez entrer un nom de tâche</p></div>");
             }
         }
+        
+
 
 }
 

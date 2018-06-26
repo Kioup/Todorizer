@@ -21,7 +21,6 @@ class ProjectManager {
                     'id' => $project->getId()                              
                 ]
             );
-
         }
 
         public function update($project_Id, $name){
@@ -50,6 +49,8 @@ class ProjectManager {
             $request  = $request->fetchall(PDO::FETCH_CLASS,'Project');              
             return $request;        
         } 
+
+
     
         // extraction d'un projets à partir de son id:
         public function extract_Project($id) {

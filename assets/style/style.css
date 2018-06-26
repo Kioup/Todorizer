@@ -462,8 +462,15 @@ main div.entete span.tool {
     top: 50%;
     display: inline-block;
     transform: translateY(-50%);
-    font-size: 1.5em;
+    font-size: 2em;
     right: 40px;
+    transition: all 0.5s;
+    cursor: pointer;
+    transform-origin: top right;
+}
+
+main div.entete span.tool:hover {
+    transform: rotate(70deg);
 }
 
 main div.list {
@@ -492,6 +499,10 @@ main div.list form input[type="text"], main div.contenu form.log input[type="tex
     display: inline-block;
     font-family: "Roboto Mono", Arial, sans-serif;
     vertical-align: middle; 
+}
+
+main div.list div.tache {
+    cursor: grab;
 }
 
 main div.list div.tache, main div.list div.new {
@@ -614,6 +625,34 @@ main div.CGU p {
     margin: 20px auto;
     text-align: justify;
 }
+
+/* page d'edition */ 
+
+main div.edit {
+    margin: 0 auto;
+}
+
+main div.edit span {
+    width: 150px;
+    height: 150px;
+    display: inline-block;
+    margin: 0 20px;
+    padding: 10px;
+}
+
+main div.edit div.contenu div{
+    margin: 0 auto;
+    text-align: center;
+}
+
+main div.edit span i {
+    font-size: 2.5em;
+    margin: 20px 0;
+}
+
+main div.edit span p {
+    line-height: 1em;
+} 
 
 
 
