@@ -7,7 +7,7 @@
         private $email;
         private $password;
         private $name;
-        private $firstName;
+        private $firstname;
         private $avatar;
         
         /* Setter */
@@ -25,7 +25,7 @@
             $this->name = $newName;
         }
         public final function setFirstName($newFirstName) {
-            $this->avatar = $newAvatar;
+            $this->firstname = $firstname;
         }
         public final function setAvatar($newAvatar) {
             $this->avatar = $newAvatar;
@@ -43,10 +43,10 @@
             return $this->password;
         }
         public final function getName() {
-            return $this->pseudo;
+            return $this->name;
         }
         public final function getFirstName() {
-            return $this->firstName;
+            return $this->firstname;
         }
         public final function getAvatar() {
             return $this->avatar;

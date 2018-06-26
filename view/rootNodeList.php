@@ -1,21 +1,17 @@
 --><main>
-<section>
 <div class="entete">
     <form method="POST" action="">
     <span><i class="fas fa-folder-open"></i></span>
 <?php
-echo '<input type="text" placeholder="Nom du projet"';
-echo (isset($_SESSION['user'])) ? '' : ' id="projectName"';
-echo ' name="name" value="'.$project->getName().'" focus>';
+echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name" value="'.$project->getName().'" focus>';
 ?>
         <span class="tool"><i class="fas fa-wrench"></i></span>
-
+        <input type="hidden" id="projectID" value="<?php echo $project->getId(); ?>">
         <input type="hidden" name="ctrl" value="project">
         <input type="hidden" name="action" value="setName"> 
     </form> 
 </div>
 <div class="list">
-    <h2 class="underline"> Groupe de taches </h2>                
     <form method="POST" action="">
     <div class="form-block">
         <?php
@@ -36,9 +32,5 @@ echo ' name="name" value="'.$project->getName().'" focus>';
         <input type="hidden" name="ctrl" value="node">
         <input type="hidden" name="action" value="add">
     </form>              
-</section><section>
-<div class="titre">
-<h2>Notifications</h2>
 </div>
-</section>
 </main>

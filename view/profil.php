@@ -7,9 +7,9 @@
             </div>
             <div class="contenu">
                 <form class="log">
-                    <input type="text" placeholder="Prenom">
-                    <input type="text" placeholder="Nom">
-                    <input type="email" placeholder="Email">
+                    <input type="text" placeholder="Prenom" value="<?php echo $user->getFirstName(); ?>">
+                    <input type="text" placeholder="Nom"  value="<?php echo $user->getName(); ?>">
+                    <input type="email" placeholder="Email"  value="<?php echo $user->getEmail(); ?>">
                     <label class="fill">Modifier
                         <input type="submit" value="Inscription">
                     </label>

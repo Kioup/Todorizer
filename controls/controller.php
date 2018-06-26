@@ -3,9 +3,8 @@
     $projectList = [];
 
     require 'model/user.class.php';
-
-
-
+    require 'model/userManager.class.php';
+    $userManager = new UserManager();
     // Dev user: 
     $user = new User();
     $data = ['id' => 3, 'name' => 'toto'];
@@ -14,6 +13,14 @@
 
     if (isset($_POST) && isset($_POST['page'])) {
         switch ($_POST['page']) {
+            case 'inscription':
+                $user->hydrate($userManager->create());
+                $page = 'blank.php';
+                break;
+            case 'login' :
+                $user->hydrate($userManager->connect());
+                $page = 'blank.php';
+                break;
             case 'connect':
                 $_SESSION['user'] = serialize($user);
                 $page = 'blank.php';
@@ -40,7 +47,7 @@
         require_once(__CONTROLROOT__ . 'loggedController.php');
         $loggedController = new LoggedController($id_user);
 
-        if (in_array($page,['blank.php'])) {
+        if (in_array($page,['blank.php', 'project.php'])) {
             if (isset($_POST['view'])) {
                 switch ($_POST['view']){
                     case 'rootNodeList':

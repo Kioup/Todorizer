@@ -4,8 +4,8 @@ class ProjectManager {
     private $db;
     
         public function __construct() {
-            require_once('./model/db.class.php');
-            require_once('./model/project.class.php');
+            require_once(__MODELROOT__.'db.class.php');
+            require_once(__MODELROOT__.'project.class.php');
             $connection = new Connection();
             $this->db = $connection->get_connection();
         }
@@ -21,6 +21,19 @@ class ProjectManager {
                     'id' => $project->getId()                              
                 ]
             );
+
+        }
+
+        public function update($project_Id, $name){
+            $update= $this->db->prepare(
+                'update project SET name = :name WHERE id = :id'
+             );
+             $update->execute(
+                 [
+                     'name' => $name,
+                     'id' => $project_Id                              
+                 ]
+             );
         }
 
 

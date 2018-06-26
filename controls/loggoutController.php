@@ -60,8 +60,10 @@
         $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
     }
 
+
+    //Remove node
     if (isset($_POST['id_to_remove'])) {
-        
+        $currentProject->removeNode($_POST['id_to_remove']);
     }
 
     //Save session project

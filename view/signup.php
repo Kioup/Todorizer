@@ -6,11 +6,12 @@
                 <span><i class="fa fa-user"></i></span>
             </div>
             <div class="contenu">
-                <form class="log">
-                    <input type="text" placeholder="Prenom" name="prenom">
-                    <input type="text" placeholder="Nom" name="nom">
-                    <input type="email" placeholder="Email" name="email">
-                    <input type="password" placeholder="Mot de passe" name="password">
+                <form class="log" method="POST" action="">
+                    <input type="hidden" value="inscription" name="page">
+                    <input type="text" placeholder="Prenom" name="firstname" required>
+                    <input type="text" placeholder="Nom" name="name" required>
+                    <input type="email" placeholder="Email" name="email" required>
+                    <input type="password" placeholder="Mot de passe" required name="password">
                     <label class="fill">Inscription
                     <input type="submit" value="connexion">
                     </label>

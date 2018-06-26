@@ -3,7 +3,7 @@ $(document).ready(function(){
 
     $(".list .form-block a.newPro").on("click", createTask);
 
-    $(".trash").on("click", rmTask);
+    //$(".trash").on("click", rmTask);
     
     updateNode($(".tache").children("input[type=text]"));
     updateNode($(".tache").find("textarea"));
@@ -32,7 +32,7 @@ function updateNode(e) {
     ajaxUpdateNode(e);
 }
 function removeNode(e) {
-    ajaxRemoveNode(e);
+    if (ajaxRemoveNode(e)) rmTask();
 }
 
 
@@ -52,7 +52,7 @@ function createTask(e){
             updateNode($(".tache").last().children("input[type=text]"));
             updateNode($(".tache").last().find("textarea"));
             removeNode($(".tache").last().find(".trash"));
-            $(".trash").last().on("click", rmTask);
+            //$(".trash").last().on("click", rmTask);
             $( ".deploi" ).last().click(function() {
                 var icone = $(this).parent().find(".deploi").find("i");
                 var deploi = $(this).next(".develop");
@@ -77,11 +77,6 @@ function createTask(e){
             }
         }
 
-}
-
-//$(".trash").on("click", rmTask);
-function rmTask(){
-    $(this).parent().parent().parent().remove();
 }
 
 function changeColor(jscolor) {

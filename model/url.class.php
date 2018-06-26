@@ -10,17 +10,9 @@
         }
         
         public function get($page) {
-            
-            if ($this->env == 'prod') {
-                
-                echo "/page/" . $page;
-                
-            } else {
                 
                 echo $_SERVER['REQUEST_URI'] . "redirect.php?page=" . $page;
-                
-            }
-            
+                            
         }
         
         private function setEnv() {

@@ -33,7 +33,6 @@ Class LoggedController{
         $sortedNodeList=$this->sortNodeList($nodeList);
         $project->setNodeList($sortedNodeList);
         
-       // $project->setNodeList($nodeList);
         $this->url->showHeaderCON();
         include 'view/rootNodeList.php'; 
     }

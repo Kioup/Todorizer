@@ -1,8 +1,10 @@
 <?php
-
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
+
+    var_dump($_POST);
+
 
     //define('__ENV__','prod');
     define('__CONTROLROOT__', 'controls/');

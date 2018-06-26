@@ -29,3 +29,83 @@
         width: calc(100% - 100px);
     }
 }
+
+@media screen and (max-width: 500px) {
+
+    main {
+        min-height: 100vh;
+        padding: 10px 0;    
+    }
+
+    main section {
+        padding: 10px;
+    }
+
+    main div.list {
+        padding: 10px;
+    }
+
+    aside.menu {
+        width: 60px;
+    }
+
+    main div.entete {
+        margin: 5px;
+        padding: 5px 0;
+    }
+
+    main div.entete span {
+        margin: 0 5px;
+    }
+
+    main div.entete input[type="text"] {
+        width: calc(100% - 90px);
+    }
+
+    header {
+        display: none;
+    }
+
+    main div.entete span.tool {
+        right: 0;
+    }
+
+    main div.list form div.alert {
+        width: 100%;
+    }
+
+    header, main {
+        margin-left: 60px;
+        width: calc(100% - 60px);
+    }
+
+    main div.contenu form.log input[type="text"], main div.contenu form.log input[type="email"], main div.contenu form.log input[type="password"] {
+        width: 100%;
+    }
+
+    .fill {
+        width: 100%;
+    }
+
+    .dash-mobile h2 {
+        display: none;
+    }
+
+    .dash-mobile {
+        margin: 0;
+        padding: 0;
+    }
+
+    .dash-mobile + * {
+        display: none;
+    }
+
+    div.dashboard ul li {
+        width: calc(50vw - 70px);
+        height: calc(50vw - 70px);
+    }
+
+    div.dashboard ul li span i {
+        font-size: 2.5em;
+    }
+}

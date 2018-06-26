@@ -14,51 +14,17 @@ echo ' name="name" value="'.$project->getName().'" focus>';
     </form> 
 </div>
 <div class="list">
-    <h2 class="underline"> Groupe de taches </h2>                
     <form method="POST" action="">
     <div class="form-block">
         <?php
 
-echo "<h2>".$currentNode->getTitle()." (".$currentNode->getNodePath().")</h2>";               
-
-
+        echo "<h2>".$currentNode->getTitle()." (".$currentNode->getNodePath().")</h2>";               
 
             if ($nb_children){
                 for ($i = 1; $i <= $nb_children; $i++) {
                     $currentChildNode=$sortedNodeList[$currentNodePath.".".$i];
-                    include 'view/node.php';  
-                    $nb_subChildren=$currentChildNode->getNbChildren();
-                
-                    if ($nb_subChildren){
-                        echo '<ul style="padding-left:5em;">';
-                        for ($j = 1; $j <= $nb_subChildren; $j++) {
-                            $currentChildNode=$sortedNodeList[($currentNodePath.".".$i).".".$j];
-
-
-
-
-                        $childNodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ; 
-                            
-                        echo '
-                        <div class="tache">
-                           <h2> '.$currentChildNode->getTitle() .'</h2>                
-                                <div>
-                                    <a href="'. $childNodeListString .'" >
-                                        <span class="pen"><i class="fas fa-pencil-alt"></i></span>
-                                    </a> 
-                                </div>
-                        </div>
-                        ';
-
-
-
-
-
-
-                          //  include 'view/node.php';
-                        }
-                        echo '</ul>';
-                    } 
+                    $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ;                     
+                    include 'view/node.php';                      
                 }
         }
         ?>

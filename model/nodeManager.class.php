@@ -6,8 +6,8 @@ class NodeManager {
     private $db;
 
     public function __construct() {
-        require_once('./model/db.class.php');
-        require_once('./model/node.class.php');
+        require_once(__MODELROOT__.'db.class.php');
+        require_once(__MODELROOT__.'project.class.php');
         $connection = new Connection();
         $this->db = $connection->get_connection();
     }
@@ -24,17 +24,14 @@ class NodeManager {
                 'id_project' => $node->getIdProject(),
                 'node_path' => $node->getNodePath(),
                 'id_parent' => $node->getIdParent(),
+                'start_date' => $node->getStartDate(),
+                'end_date' => $node->getEndDate(),
                 'id_child' => $node->getIdChild(),
-                'nb_children' => $node->getNbChildren()                    
+                'nb_children' => $node->getNbChildren(),
+                'progress' => $node->getProgress(),                  
             ]
         );
     }
-
-/*     public function extract_allNodes() {
-        $request = $this->db->query("SELECT * FROM node");
-        $request = $request->fetchall(PDO::FETCH_ASSOC);
-        return $request;
-    } */
 
     public function extract_ProjectNodes($project){
         $id_project=$project->getId();

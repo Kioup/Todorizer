@@ -6,9 +6,10 @@
                 <span><i class="fa fa-user"></i></span>
             </div>
             <div class="contenu">
-                <form class="log">
-                    <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Mot de passe">
+                <form class="log"  method="POST" action="">
+                    <input type="email" placeholder="Email" name="email" required>
+                    <input type="hidden" value="login" name="page" required>
+                    <input type="password" placeholder="Mot de passe" name="password" required>
                     <label class="fill">Connexion
                         <input type="submit" value="connexion">
                     </label>

@@ -83,10 +83,13 @@ function ajaxAddNode(t) {
 }
 function ajaxRemoveNode(elem) {
     elem.click(function(e){
-        var e = $(e.target);
-        var child = e.parents('.tache').children('input[type=hidden]')[0];
-        var id = child.value;
-        remove(id);
+        if (window.confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) { 
+            var e = $(e.target);
+            var child = e.parents('.tache').children('input[type=hidden]')[0];
+            var id = child.value;
+            remove(id);
+            e.parents('.tache').remove();
+        }
     });
 }
 function ajaxUpdateNode(elem) {

@@ -213,35 +213,56 @@ main div.contenu form.log input[type="submit"] {
 
 div.dashboard ul{
     display: flex;
-    justify-content: space-around;
     flex-wrap: wrap;
     position: relative;
+    animation: projectNode 1s ease-in;
+    /* justify-content: space-around;     */
 }
+
+/* @keyframes projectNode {
+    0% {
+        justify-content: center;        
+    }
+
+    100% {
+        justify-content: space-around;
+    }
+} */
 
 div.dashboard ul li {
     display: inline-block;
     width: 150px;
     height: 150px;
     text-align: center;
-    transition: all 3ms;
-    position: absolute;
     transition: all 0.5s;
-    animation: project 1s ease-in;
+    animation: project 0.5s ease-in;
+    position: relative;
+    margin: 0 20px;
+
 }
 
 @keyframes project {
     0% {
         top: 80px;
         opacity: 0;
+        margin: 0 0;
+        animation-timing-function: ease-in-out;
     }
 
     60% {
         top: -20px;
+        margin: 0 0;
+        animation-timing-function: ease-out;
+    }
+
+    75% {
         opacity: 1;
     }
 
     99% {
         top: 0px;
+        margin: 0 20px;
+        animation-timing-function: ease-in;
     }
 
     100% {
@@ -255,13 +276,50 @@ div.dashboard ul li form a {
     font-family: "comfortaa", Arial, sans-serif;
 }
 
-div.dashboard ul li span i {
-    font-size: 6em;
+div.dashboard p:first-child {
+    margin: 10px 0;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: calc(100% - 10px);
+    overflow: hidden;
 }
 
-div.dashboard ul li:hover {
-    color: black;
-    background: white;
+div.dashboard ul li span i {
+    font-size: 5em;
+}
+
+div.dashboard ul li.new span i {
+    opacity: 0.7;
+}
+
+div.dashboard span {
+    display: inline-block;
+}
+
+div.dashboard ul li span.background-icon {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    border: solid 1px #fff6;
+}
+
+div.dashboard ul li.new {
+    border: dashed 3px white;
+}
+
+div.dashboard ul li.new span:last-child{
+    position: absolute;
+    color: white;
+    bottom: 10px;
+    left: 10px;
+    font-size: 0.3em;
+}
+
+div.dashboard ul li.new span:last-child i {
+    opacity: 1;
 }
 
 /* 
@@ -463,6 +521,8 @@ main div.list form div.alert i {
     margin: 0 10px;
     line-height: 50px;
     width: 50px;
+    text-align: center;
+
 }
 
 main div.list form div.alert p {
@@ -470,6 +530,8 @@ main div.list form div.alert p {
     font-size: 1.1em;
     text-align: center;
     font-family: "Roboto Mono", Arial, sans-serif;
+    width: calc(100% - 70px);
+    vertical-align: middle;
 }
 
 main div.list form input[type="text"] + a,  main div.list form input[type="text"] ~ span{

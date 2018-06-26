@@ -43,8 +43,9 @@
         }
         
         public final function removeNode($id) {
-            $tab = $this->node_list;
+            $tab = $this->getNodeList();
             unset($tab[$id]);
+            $this->setNodeList($tab);
         }
         
         /* Getter */

@@ -3,44 +3,65 @@
     class UserManager {
         
         private $db;
+        private $user;
         
         public function __construct() {
             require_once('./model/db.class.php');
+            require_once('./model/user.class.php');
             $connection = new Connection();
+            $this->user = new User();
             $this->db = $connection->get_connection();
         }
         
-        
-        public function create(User $user) {
+        public function create() {
+            
+            $this->hydrate();
             
             $create = $this->db->prepare(
-	           'INSERT INTO user ( name, firstname, avatar, email, password ) VALUES ( :name, :firstname, :avatar, :email, :password )'
+	           'INSERT INTO user ( name, firstname, email, password ) VALUES ( :name, :firstname, :email, :password )'
             );
-
-            $create->execute(
-                [
-                    'name' => $user->getName(),
-                    'firstname' => $user->getFirstName(),
-                    'avatar' => $user->getAvatar(),
-                    'email' => $user->getEmail(),
-                    'password' => $user->getPassword()
-                    
-                ]
-            );
+            
+            $data = [
+                'name' => $this->user->getName(),
+                'firstname' => $this->user->getFirstName(),
+                'email' => $this->user->getEmail(),
+                'password' => md5($this->user->getPassword())
+            ];
+            
+            $create = $create->execute($data);
+            
+            return $this->user;
 	   }
         
-       public function connect(User $user) {
+       public function connect() {
+            
+            $this->hydrate();
+
             $connect = $this->db->query(
-                'SELECT email, password FROM user'
+                'SELECT * FROM user'
             );
             $connect = $connect->fetchall(PDO::FETCH_ASSOC);
-            foreach($connect as $i){
-                if (($user->getEmail() == $i["email"]) && ($user->getPassword() == $i["password"])) {
-                    $user->hydrate($i);
-                    $_SESSION["user"] = $user;
+           
+           echo md5($this->user->getPassword());
+           
+            foreach($connect as $i) {
+                
+                var_dump($i);
+                
+                if (($this->user->getEmail() == $i["email"]) && (md5($this->user->getPassword()) == $i["password"])) {
+                    $this->user->hydrate($i);
+                    $_SESSION["user"] = serialize($this->user);
+                    return $this->user;
                 }
             }
-           return $user;
+           
+            return false;
+        }
+        
+        public function hydrate() {
+            
+            $this->user->hydrate($_POST);
+            
         }
         
 //        public function update() {

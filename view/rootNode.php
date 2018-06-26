@@ -19,7 +19,7 @@
         <input type="checkbox">
         <span class="checkmark"></span>
     </label>
-    <input type="text" value="<?php echo $node->getTitle(); ?> " data-type="title" >
+    <input type="text" value="<?php echo ':-)'.$node->getTitle(); ?> " data-type="title" >
     <span class="deploi">
         <i class="fas fa-angle-down"></i>
     </span>
@@ -38,7 +38,7 @@
             </a>       
         </div>
     </div>
-    <input type="hidden" name="taskUpdate" value=" . $node->getId() . ">
+    <input type="hidden" name="taskUpdate" value="<?php echo $node->getId(); ?>">
 
 <?php
 
@@ -51,12 +51,7 @@
                     
                 echo '
                 <div class="tache">
-                   <h2> '.$currentChildNode->getTitle() .'</h2>                
-                        <div>
-                            <a href="'. $childNodeListString .'" >
-                                <span class="pen"><i class="fas fa-pencil-alt"></i></span>
-                            </a> 
-                        </div>
+                    <a href="'. $childNodeListString .'" ><h2>'.$currentChildNode->getTitle() .'</h2></a>                
                 </div>
                 ';
 
