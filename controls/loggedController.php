@@ -26,7 +26,7 @@ Class LoggedController{
         include 'view/projectList.php'; 
     }
 
-    public function displayProjectNodes($id_project){
+    public function displayRootNodes($id_project){
         $project=$this->projectManager->extract_Project($id_project);
         $nodeList=$this->nodeManager->extract_ProjectNodes($project);
 
@@ -35,10 +35,10 @@ Class LoggedController{
         
        // $project->setNodeList($nodeList);
         $this->url->showHeaderCON();
-        include 'view/nodeList.php'; 
+        include 'view/rootNodeList.php'; 
     }
 
-    public function displayChildNodes($id_project,$currentNodePath){
+    public function displayNodes($id_project,$currentNodePath){
         $nb_children=null;
         $project=$this->projectManager->extract_Project($id_project);
         $nodeList=$this->nodeManager->extract_ProjectNodes($project);
@@ -53,7 +53,7 @@ Class LoggedController{
         $nb_children=$currentNode->getNbChildren();
 
         $this->url->showHeaderCON();        
-        include 'view/childNodeList.php';      
+        include 'view/nodeList.php';      
     }
 
     private function sortNodeList($nodeList){

@@ -2,9 +2,10 @@
     --><main>
         <section>
             <div class="titre">
-                <h2>Projets</h2>
-
-                <?php
+                <h2 class="underline">Projets</h2>
+            </div>
+            <div class="contenu dashboard">
+                    <?php
 
 
                     echo "<br>".$project->getName();
@@ -12,13 +13,12 @@
                         echo "<br>- ".$node->getTitle();    
                     }
 
-                ?>
-
+                    ?>
             </div>
         </section>
         <section>
             <div class="titre">
-                <h2>Notifications</h2>
+                <h2 class="underline">Notification</h2>
             </div>
         </section>
     </main>

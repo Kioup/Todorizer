@@ -1,5 +1,5 @@
     <aside class="menu">
-        <a href="">
+        <a href="<?php $url->get('profil.php'); ?>">
             <span><i class="fa fa-user"></i></span>
             <p>Profil</p>
         </a>

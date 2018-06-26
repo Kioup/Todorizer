@@ -13,13 +13,13 @@ $(document).ready(function(){
         var icone = $(this).parent().find(".deploi").find("i");
         var deploi = $(this).next(".develop");
         deploi.slideToggle( "fast" );
-        if (icone.hasClass("fa-plus-square")){
-            icone.removeClass("fa-plus-square");
-            icone.addClass("fa-minus-square");
+        if (icone.hasClass("fa-angle-down")){
+            icone.removeClass("fa-angle-down");
+            icone.addClass("fa-angle-up");
         }
         else {
-            icone.removeClass("fa-minus-square");
-            icone.addClass("fa-plus-square");
+            icone.removeClass("fa-angle-up");
+            icone.addClass("fa-angle-down");
         }
     });
 
@@ -45,11 +45,11 @@ function createTask(e){
         if (input.value != "" || input.value.length != 0){
             var titre = input.value;
             addNode(titre);
-            block.before("<div class='tache'><input type='text' value='" + titre + "' name='title' data-type='title'><span class='deploi'><i class='fas fa-plus-square'></i></span><div class='develop'><fieldset><legend>description</legend><textarea row='4' placeholder='Entrez un texte descriptif' data-type='description'></textarea></fieldset><div><span class='trash'><i class='fas fa-trash'></i></span><span class='pen'><i class='fas fa-pencil-alt'></i></span></div></div></div>");
+            block.before("<div class='tache'><label class='container'><input type='checkbox'><span class='checkmark'></span></label><input type='text' value='" + titre + "' name='title' data-type='title'><span class='deploi'><i class='fas fa-angle-down'></i></span><div class='develop'><fieldset><legend>description</legend><textarea row='4' placeholder='Entrez un texte descriptif' data-type='description'></textarea></fieldset><div><span class='trash'><i class='fas fa-trash'></i></span><span class='pen'><i class='fas fa-pencil-alt'></i></span></div></div></div>");
             $("div.alert").remove();
             input.value = "";
             input.focus();
-            updateNode($(".tache").last().children(":first"));
+            updateNode($(".tache").last().children("input[type=text]"));
             updateNode($(".tache").last().find("textarea"));
             removeNode($(".tache").last().find(".trash"));
             $(".trash").last().on("click", rmTask);
@@ -57,13 +57,13 @@ function createTask(e){
                 var icone = $(this).parent().find(".deploi").find("i");
                 var deploi = $(this).next(".develop");
                 deploi.slideToggle( "fast" );
-                if (icone.hasClass("fa-plus-square")){
-                    icone.removeClass("fa-plus-square");
-                    icone.addClass("fa-minus-square");
+                if (icone.hasClass("fa-angle-down")){
+                    icone.removeClass("fa-angle-down");
+                    icone.addClass("fa-angle-up");
                 }
                 else {
-                    icone.removeClass("fa-minus-square");
-                    icone.addClass("fa-plus-square");
+                    icone.removeClass("fa-angle-up");
+                    icone.addClass("fa-angle-down");
                 }
             });
             

@@ -1,0 +1,31 @@
+@media screen and (max-width: 1080px) {
+    main section {
+        padding: 20px;
+    }
+
+    main div.list {
+        padding: 20px 40px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    aside.menu a p {
+        display: none;
+    }
+
+    aside.menu {
+        width: 100px;
+        text-align: center;
+    }
+
+    aside.menu a span {
+        float: none;
+        transform: none;
+        margin-top: 0;
+    }
+
+    header, main {
+        margin-left: 100px;
+        width: calc(100% - 100px);
+    }
+}

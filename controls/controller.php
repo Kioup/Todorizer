@@ -16,6 +16,7 @@
         switch ($_POST['page']) {
             case 'connect':
                 $_SESSION['user'] = serialize($user);
+                $page = 'blank.php';
                 break;
             case 'deco':
                 unset($_SESSION['user']);
@@ -32,25 +33,32 @@
 
     //User controller
     if (isset($_SESSION['user'])) {
+        
         $user = unserialize($_SESSION['user'] );
         $id_user = $user->getId();
 
         require_once(__CONTROLROOT__ . 'loggedController.php');
-        $loggedController=new LoggedController($id_user);
+        $loggedController = new LoggedController($id_user);
 
-        if (isset($_POST['view'])){
-            switch ($_POST['view']){
-                case 'nodeList':
-                    $loggedController->displayProjectNodes($_POST['projectId']);                  
-                    break;
-                case 'childNodeList':
-                    $loggedController->displayChildNodes($_POST['projectId'], $_POST['nodePath']);
-                    break;                             
-            }       
+        if (in_array($page,['blank.php'])) {
+            if (isset($_POST['view'])) {
+                switch ($_POST['view']){
+                    case 'rootNodeList':
+                        $loggedController->displayRootNodes($_POST['projectId']);                  
+                        break;
+                    case 'nodeList':
+                        $loggedController->displayNodes($_POST['projectId'], $_POST['nodePath']);
+                        break;                             
+                }       
+            } else {
+                $loggedController->displayAllProjects();
+            }
+            
         } else {
-            $loggedController->displayAllProjects();
-        } 
-
+            
+            $url->showHeaderCON();
+            
+        }
     //NoUser controller
     } else {
         include_once(__CONTROLROOT__ . 'loggoutController.php');

@@ -1,6 +1,6 @@
 <?php
 session_start();
-$url = ((isset($_SESSION['env'])) && ($_SESSION['env'] == 'dev')) ? "http://localhost/todorizer/" : "http://todorizer.santhor.com/";  
+$url = ((isset($_SESSION['env'])) && ($_SESSION['env'] == 'dev')) ? "http://localhost/todorizer/" : "http://todorizer2.santhor.com/";  
 ?>
 
 <form id="redirectForm" action="<?php echo $url; ?>" method="POST">

@@ -19,9 +19,7 @@ class ProjectController {
         
         if (isset($_POST['name'])){
             $data['name']=$_POST['name'];            
-        } else {
-            $data['name']="Projet sans nom";
-        }   
+        }
         if (isset($_POST['icon'])){
             $data['icon']=$_POST['icon'];            
         }
