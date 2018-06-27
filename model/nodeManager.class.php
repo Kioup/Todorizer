@@ -47,7 +47,7 @@ class NodeManager {
         return $request;
     }
 
-    public function findParent($id_parent){
+    public function getNode($id_parent){
         $request = $this->db->prepare(
             'SELECT * FROM node WHERE id = ?'
          );
@@ -83,13 +83,13 @@ class NodeManager {
          );
     }
 
-    public function update_nb_children($id,$nb_children){
+    public function update_nb_children($id,$nb_children,$children){
         $update= $this->db->prepare(
             'UPDATE node SET nb_children = :nb_children WHERE id = :id'
          );
          $update->execute(
              [
-                 'nb_children' => $nb_children+1,
+                 'nb_children' => $nb_children+$children,
                  'id' => $id                              
              ]
          );

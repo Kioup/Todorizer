@@ -46,26 +46,46 @@
 
         require_once(__CONTROLROOT__ . 'loggedController.php');
         $loggedController = new LoggedController($id_user);
-
-        if (in_array($page,['blank.php', 'project.php'])) {
-            if (isset($_POST['view'])) {
-                switch ($_POST['view']){
-                    case 'rootNodeList':
-                        $loggedController->displayRootNodes($_POST['projectId']);                  
-                        break;
-                    case 'nodeList':
-                        $loggedController->displayNodes($_POST['projectId'], $_POST['nodePath']);
-                        break;                             
-                }       
-            } else {
-                $loggedController->displayAllProjects();
-            }
+        
+        switch ($page) {
             
-        } else {
-            
-            $url->showHeaderCON();
-            
+            case 'blank.php':
+            case 'project.php':
+                if (isset($_POST['view'])) {
+                    switch ($_POST['view']){
+                        case 'rootNodeList':
+                            $loggedController->displayRootNodes($_POST['projectId']);                  
+                            break;
+                        case 'nodeList':
+                            $loggedController->displayNodes($_POST['projectId'], $_POST['nodePath']);
+                            break;                               
+                    }
+                } else {
+                    $loggedController->displayAllProjects();
+                }
+                break;
+            case 'newProject.php':  
+                $page='blank.php';
+                $loggedController->createNewProject();
+                break;
+            case 'projectEdit.php':
+                $loggedController->editProject($_POST['projectId']);
+                break;
+            case 'profil.php':
+                if (isset($_POST['name'])) {
+                    
+                    
+                    
+                    
+                }
+                
+                
+                
+            default:
+                $url->showHeaderCON();
+    
         }
+        
     //NoUser controller
     } else {
         include_once(__CONTROLROOT__ . 'loggoutController.php');

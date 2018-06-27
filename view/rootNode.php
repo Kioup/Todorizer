@@ -25,7 +25,7 @@
             </a>       
         </div>
     </div>
-    <input type="hidden" name="taskUpdate" value="<?php echo $node->getId(); ?>">
+    <input type="hidden" name="taskUpdate" class="taskUpdate" value="<?php echo $node->getId(); ?>">
 
 <?php
 

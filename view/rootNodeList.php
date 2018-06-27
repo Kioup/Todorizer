@@ -1,4 +1,8 @@
 --><main>
+<?php
+    $editProjectLink="redirect.php?projectId=" . $project->getId() . "&page=projectEdit.php"; 
+?>
+
 <div class="entete">
     <form method="POST" action="">
 <span><i class="<?php echo "fas fa-". ($project->getIcon() ?: 'folder'); ?>" style="color: <?php echo ($project->getIconColor() ?: "white") ?> "></i></span>
@@ -7,6 +11,11 @@ echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name
 ?>
         <span class="tool"><i class="fas fa-wrench"></i></span>
         <input type="hidden" id="projectID" value="<?php echo $project->getId(); ?>">
+        <input type="hidden" name="ctrl" value="project">
+        <input type="hidden" name="action" value="setName"> 
+        <input type="hidden" id="projectRoot" value="1">
+
+        <a href="<?php echo $editProjectLink; ?>"><span class="tool"><i class="fas fa-wrench"></i></span></a>
         <input type="hidden" name="ctrl" value="project">
         <input type="hidden" name="action" value="setName"> 
         <input type="hidden" id="projectRoot" value="1">

@@ -2,15 +2,13 @@
         <div class="entete">
             <form method="POST" action="">
             <span><i class="fas fa-folder-open"></i></span>
-<?php
-    echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name" value="'.$currentProject->getName().'" focus>';
-?>
+                <?php
+                    echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name" value="'.$currentProject->getName().'" focus>';
+               ?>
                 <a href="<?php $url->get('projectEdit.php'); ?>"><span class="tool"><i class="fas fa-wrench"></i></span></a>
-
-                <!--<input class="jscolor" onchange="changeColor(this.jscolor)">-->
+ 
                 <input type="hidden" name="ctrl" value="project">
                 <input type="hidden" name="action" value="setName"> 
-                <!--<input type="submit" value="Changer couleur (no work)p">-->                
             </form> 
         </div>
         <div class="list">

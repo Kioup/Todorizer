@@ -6,10 +6,11 @@
                 <span><i class="fa fa-user"></i></span>
             </div>
             <div class="contenu">
-                <form class="log">
-                    <input type="text" placeholder="Prenom" value="<?php echo $user->getFirstName(); ?>">
-                    <input type="text" placeholder="Nom"  value="<?php echo $user->getName(); ?>">
-                    <input type="email" placeholder="Email"  value="<?php echo $user->getEmail(); ?>">
+                <form class="log" method="GET" action="redirect.php?">
+                    <input type="text" placeholder="Prenom" name="firstname" required value="<?php echo $user->getFirstName(); ?>">
+                    <input type="text" placeholder="Nom" name="name" required value="<?php echo $user->getName(); ?>">
+                    <input type="email" placeholder="Email" name="email" required value="<?php echo $user->getEmail(); ?>">
+                    <input type="hidden" name="page" value="profil.php">
                     <label class="fill">Modifier
                         <input type="submit" value="Inscription">
                     </label>

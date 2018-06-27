@@ -41,14 +41,26 @@ echo '<input type="text" placeholder="Nom du projet id="projectName" name="name"
             /// fin du fil d'ariane
             echo "<br><br><br><br>";
 
-            echo "<h2>".$currentNode->getTitle()." (".$currentNode->getNodePath().")</h2>";               
+            echo "<h2>".$currentNode->getTitle()." (".$currentNode->getNodePath().")</h2>";      
+            
+            //Si enfants ?
+            if ($currentNode->getNbChildren()){
+            
+                //On parcours liste de noeuds
+                foreach ($sortedNodeList as $childNodePath => $currentChildNode) {
+                    
+                    $np = explode('.',$childNodePath);
 
-            if ($nb_children){
-                for ($i = 1; $i <= $nb_children; $i++) {
-                    $currentChildNode=$sortedNodeList[$currentNodePath.".".$i];
-                    $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ;                     
-                   
-                    include 'view/node.php';  
+                    //Si le path enfant comporte le path parent
+                    if (!strpos($childNodePath,$currentNode->getNodePath())){
+                        
+                        //Si l'enfant est un enfant direct
+                        if ((count($np) == count($DecomposedNodePath)+1)) {
+                            
+                            $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ;                     
+                            include 'view/node.php'; 
+                        }
+                    }
                 }
             }
         ?>

@@ -8,6 +8,7 @@ $(document).ready(function(){
     //$(".trash").on("click", rmTask);
     
     updateNode($(".tache").children("input[type=text]"));
+    progress($(".checkmark"));
     updateNode($(".tache").find("textarea"));
     removeNode($(".tache").find(".trash"));
     drag = dragula([document.getElementById("block-task")]);
@@ -26,38 +27,55 @@ $(document).ready(function(){
         }
     });
 
-    $("div.edit div.contenu div span.fill").on("click", showPopup());
-    $("div.overlay").on("click", hidePopup());
+    $("div.edit div.contenu div span.fill").on("click", showHidePopup);
+    $("div.overlay").on("click", showHidePopup);
+    $("div.popup .slide-left").on("click", slideLeft);
+    $("div.popup .slide-right").on("click", slideRight);
 
 });
 
-function showPopup(){
-    var overlay = $("div.overlay");
-
-    overlay.addClass("in");
-
-    var popup = $("div.popup");
-
-    if (popup.hasClass("out")){
-
-        popup.removeClass("out");
-        popup.addClass("in");
-    }
+var showHidePopup = function() {
+    $("div.overlay").toggleClass('in');
+    display = $("div.popup").css("display");
+    $("div.popup").toggleClass('in');    
+    if ( display == "none" ) {
+        $( "div.popup" ).show( 200 );
+      } 
+    else {
+        $( "div.popup" ).hide( 200 );
+      }
+    $("div.icons .mini-slider").css("left", - ($("div.icons span.selected").position().left) + 80);
 }
 
-function hidePopup(){
-    var overlay = $("div.overlay");
-    if (overlay.hasClass("in")){
+var slideLeft = function(){
+    slide(1)
 
-        overlay.removeClass("in");
-    }
-    var popup = $("div.popup");
+}
 
-    if (popup.hasClass("in")){
-        
-        popup.removeClass("in");
-        popup.addClass("out");
+var slideRight = function(){
+    slide();
+}
+
+//right = 0
+//left = 1
+var slide = function(sens) {
+    var slider = $(".mini-slider");
+    var el = $(".icons span.selected");
+    var newEl = sens ? el.prev() : el.next();
+    if (newEl.length) {
+        el.removeClass("selected");
+        newEl.addClass("selected");
+        var pos = el.position().left;
+        if (sens) pos -= 160;
+        slider.css("left", -(pos));
+    
+        var elDisplay = $("div.icons span.display");
+        var iconDisplay = elDisplay.find($("i"));
+        var input = elDisplay.next();
+        clas = newEl.find("i").attr("class");
+        iconDisplay.attr("class", clas);
     }
+
 }
 
 function addNode(t) {
@@ -67,7 +85,10 @@ function updateNode(e) {
     ajaxUpdateNode(e);
 }
 function removeNode(e) {
-    if (ajaxRemoveNode(e)) rmTask();
+    ajaxRemoveNode(e);
+}
+function progress(e) {
+    ajaxProgressNode(e);
 }
 
 function createTask(e){
@@ -85,6 +106,7 @@ function createTask(e){
             input.focus();
             drag.containers.push($(".tache").last());
             updateNode($(".tache").last().children("input[type=text]"));
+            progress($(".checkmark").last());
             updateNode($(".tache").last().find("textarea"));
             removeNode($(".tache").last().find(".trash"));
             //drag = dragula([document.getElementById("block-task")]);
@@ -119,5 +141,6 @@ function createTask(e){
 
 function changeColor(jscolor) {
     // 'jscolor' instance can be used as a string
-    document.getElementsByClassName('entete')[0].style.backgroundColor = '#' + jscolor;
+    document.getElementById('rect').style.backgroundColor = '#' + jscolor;
+    document.getElementById("roct").style.color = '#' + jscolor;
 }

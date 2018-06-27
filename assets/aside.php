@@ -7,7 +7,7 @@
             <span><i class="fas fa-folder"></i></span>
             <p>Nouveau</p>
         </a>
-                <a href="<?php $url->get('profil.php'); ?>">
+        <a href="<?php $url->get('profil.php'); ?>">
             <span><i class="fa fa-user"></i></span>
             <p>Profil</p>
         </a>

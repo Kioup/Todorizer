@@ -1,5 +1,5 @@
 <?php
-
+session_start();
 define('__MODELROOT__', '../model/');
 define('__CONTROLROOT__', '');
 
@@ -15,11 +15,10 @@ $nodeController=new NodeController();
 
 
 if (isset($_POST['ajax'])){
-
+    //$_SESSION['project']=false;    
     switch($_POST['ajax']){
-
         case "nameProjectUpdate":
-           $projectManager->update($_POST['projectId'], $_POST['name']);
+           $projectManager->update($_POST['id_project'], $_POST['name']);
             break;
 
         case "titleNodeUpdate":
@@ -31,7 +30,12 @@ if (isset($_POST['ajax'])){
             $nodeManager->update_description($_POST['value'], $_POST['nodeId']);
             break;
 
-        case "deleteNode":
+        case "deleteNode":            
+            $nodeToDel=$nodeManager->getNode($_POST['nodeId']);
+            if ($id_parent=$nodeToDel->getIdParent()){
+                $nb_Brothers=$nodeManager->getNode($id_parent)->getNbChildren();
+                $nodeManager->update_nb_children($id_parent,$nb_Brothers,-1);                
+            }
             $nodeManager->delete_node($_POST['nodeId']);
             break;
 
@@ -48,12 +52,12 @@ if (isset($_POST['ajax'])){
             }
             else{                
                 $id_parent=$_POST['id_parent'];
-                $parentNode=$nodeManager->findParent($id_parent);               
+                $parentNode=$nodeManager->getNode($id_parent);               
                 $parentNodePath=$parentNode->getNodePath();
                 $max_id_children=reset($nodeManager->findBrothers($id_parent));
                 $newNodePath=$parentNodePath.".".($max_id_children+1);               
                 $nb_Brothers=$parentNode->getNbChildren();
-                $nodeManager->update_nb_children($id_parent,$nb_Brothers);
+                $nodeManager->update_nb_children($id_parent,$nb_Brothers,1);
             }
             $newNode=$nodeController->setNode($newNode,$newNodePath);
             $newId = $nodeManager->insert($newNode);
@@ -63,8 +67,18 @@ if (isset($_POST['ajax'])){
             break;
       
     }
+echo "##### ". $_POST['id_project'];
+    $project=$projectManager->extract_Project($_POST['id_project']);
+    $nodeList=$nodeManager->extract_ProjectNodes($project);
 
+    $sortedNodeList=array();
+    foreach ($nodeList as $node){
+        $sortedNodeList[$node->getNodePath()]=$node;
+    }
+    $project->setNodeList($sortedNodeList);
+    $_SESSION['project']=serialize($project);
 
 }
+
 
 ?>

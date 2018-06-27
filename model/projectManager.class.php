@@ -11,16 +11,15 @@ class ProjectManager {
         }
         
         
-        public function insert(Project $project) {            
+        public function insert($id_owner) {            
             $create = $this->db->prepare(
-               'INSERT INTO project ( name, id ) VALUES ( :name, :id )'
+               'INSERT INTO project ( id_owner ) VALUES ( :id_owner )'
             );
             $create->execute(
-                [
-                    'name' => $project->getName(),
-                    'id' => $project->getId()                              
-                ]
+                [ 'id_owner' => $id_owner ]
             );
+            $id=$this->db->lastInsertId();
+            return $id;
         }
 
         public function update($project_Id, $name){

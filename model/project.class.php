@@ -19,6 +19,9 @@
         
         /* Setter */
         
+        public final function setId($id){
+            $this->id=$id;
+        }
         public final function setName($newName) {
             $this->name = $newName;
         }	

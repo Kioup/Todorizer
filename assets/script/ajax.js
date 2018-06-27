@@ -38,6 +38,26 @@ $().ready(function(){
         }); 
     }
     
+    progressUpdate = function (id, value) {
+        console.log(id);
+        
+        
+        $.ajax({
+            url : 'controls/loggoutController.php',
+            type : 'post',
+            data : {
+                setProgress: id,
+                progress: value,
+                ajax: true
+            },
+            dataType : 'html',
+            success : function(gna){
+                /* Debug */
+                $('body').before(gna);
+            }
+        });
+    }
+    
     remove = function(id) {
         $.ajax({
             url : 'controls/loggoutController.php',
@@ -54,7 +74,7 @@ $().ready(function(){
         });
     }
     
-    update = function(id,type,value) {
+    updateN = function(id,type,value) {
         var data = {
             taskUpdate: id,
             ajax: true
@@ -81,6 +101,15 @@ $().ready(function(){
 function ajaxAddNode(t) {
     add(t);
 }
+function ajaxProgressNode(elem) {
+    elem.click(function(e){
+        var e = $(e.target);
+        var val = e.prev().is(":checked") ? 0 : 10;
+        var child = e.parents('.tache').children('input[type=hidden]')[0];
+        var id = child.value;
+        progressUpdate(id, val);
+    }); 
+}
 function ajaxRemoveNode(elem) {
     elem.click(function(e){
         if (window.confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) { 
@@ -99,6 +128,6 @@ function ajaxUpdateNode(elem) {
         var type = e.data('type');
         var child = e.parents('.tache').children('input[type=hidden]')[0];
         var id = child.value;
-        update(id, type, value);
+        updateN(id, type, value);
     });
 }

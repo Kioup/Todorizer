@@ -328,7 +328,7 @@ div.dashboard ul li.new span:last-child i {
    ######################################################################
 */
 
-.fill, .fill2, .fill3 {
+.fill, .fill2, .fill3, .fillR {
     position: relative;
     display: block;
     height: 45px;
@@ -373,12 +373,21 @@ div.dashboard ul li.new span:last-child i {
       top: -15px;
       right: 40px;
   }
+
+  .fillR {
+      color : black;
+      border: solid 1px black;
+  }
   
   .fill:hover, .fill2:hover, .fill3:hover {
     color: rgb(0, 0, 0);
   }
+
+  .fillR:hover {
+    color: rgb(255, 255, 255);
+  }
   
-  .fill:before, .fill2:before, .fill3:before {
+  .fill:before, .fill2:before, .fill3:before, .fillR:before {
     content: "";
     position: absolute;
     background: #ffffff;
@@ -389,8 +398,12 @@ div.dashboard ul li.new span:last-child i {
     z-index: -1;
     -webkit-transition: right 0.09s ease-in;
   }
+
+  .fillR:before {
+    background: #000000;
+  }
   
-  .fill:hover:before, .fill2:hover:before, .fill3:hover:before {
+  .fill:hover:before, .fill2:hover:before, .fill3:hover:before, .fillR:hover:before {
     right: 0;
   }
 
@@ -670,17 +683,19 @@ main div.edit span p {
 
 /* 
    ######################################################################
-                         main, opup
+                         main, popup
    ######################################################################
 */
 
 div.overlay {
     background-color: black;
-    opacity: 0.8;
+    opacity: 0.6;
     position: absolute;
     top: 0;
     left: 0;
     display: none;
+    width: 100%;
+    height: 100%;
 }
 
 div.overlay.in {
@@ -696,33 +711,128 @@ div.popup {
     background: white;
     border-radius: 8px;
     box-shadow: 4px 4px 4px 1px black;
-    transform: translateX(-50%);
-    transform: translateY(-50%);
+    transform: translate(-50%, -50%);
     width: auto;
     opacity: 0;
+    padding: 20px;
     transition: all 0.5s;
-    max-width: 640px;
+    min-width: 640px;
     height: 480px;
+    z-index: 2;
 }
 
 div.popup.in {
     top: 50%;
     opacity: 1;
-    display: block;
 }
 
-div.popup.out {
-    display: none;
-    opacity: 0;
-    top: 30%;
+/* color */
+
+div.popup .color {
+    text-align: center;
 }
 
-div.popup p {
+div.popup .color > p {
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+    font-size: 1.1em;
+    margin: 20px 0;
+    text-align: center;
+}
+
+div.popup .color div {
+    text-align: center;
+}
+
+div.popup .color div > span, div.popup .color div > p {
+    display: inline-block;
     width: 160px;
     height: 160px;
-    display: inline-block;
     border: solid 1px lightgray;
+    text-align: center;
+    font-size: 4em;
+    line-height: 160px;
 }
+
+div.popup .color div .fillR input {
+    display: none;
+}
+
+/* icons */
+div.icons form > div {
+    text-align: center;
+}
+
+div.icons div.wrapper {
+    margin: 20px auto;
+    width: calc(3 * 80px + 15px);
+    padding: 10px 0;
+    height: 100px;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    vertical-align: middle;
+}
+
+div.icons span.slide-left, div.icons span.slide-right {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    background: black;
+    border-radius: 50%;
+    vertical-align: middle;
+}
+
+div.wrapper div.mini-slider {
+    position: absolute;
+    transition: all 0.5s;
+    width: calc(10 * 80px);
+}
+
+div.wrapper div.mini-slider span {
+    display: inline-block;
+    width: 80px;
+    height: 80px;
+    color: black;
+    text-align: center;
+}
+
+div.wrapper div.mini-slider span p {
+    font-family: "Roboto Mono", Arial, sans-serif;
+    margin: 10px auto;
+    font-size: 1em;
+}
+
+div.wrapper div.mini-slider span i {
+    font-size: 2.5em;
+    vertical-align: middle;
+    transition: all 0.5s;
+}
+
+div.wrapper div.mini-slider span.selected {
+    background-color: darkgray;
+}
+
+div.wrapper div.mini-slider span.selected i {
+    font-size: 2.7em;
+}
+
+div.wrapper div.mini-slider span:hover {
+    background-color: darkgray;
+}
+
+div.popup .icons div .fillR input {
+    display: none;
+}
+
+div.icons span.display {
+    display: inline-block;
+    width: 200px;
+    height: 100px;
+    font-size: 4em;
+    color: black;
+}
+
+
 
 
 

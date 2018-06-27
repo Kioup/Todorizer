@@ -1,6 +1,10 @@
+<?php                        
+ $check = ($currentChildNode->getProgress() == 10) ? 'checked' : '';
+ ?>
+
 <div class="tache">
     <label class="container">
-        <input type="checkbox">
+        <input type="checkbox" <?php echo $check; ?>>
         <span class="checkmark"></span>
     </label>
         <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>"> 
@@ -24,28 +28,44 @@
             </a>       
         </div>
     </div>
-    <input type="hidden" name="taskUpdate" value="<?php echo $currentChildNode->getId(); ?>">
+    <input type="hidden" name="taskUpdate" class="taskUpdate" value="<?php echo $currentChildNode->getId(); ?>">
 
 <?php
 
 // affichage noeuds niveau 2:                  
-                    $nb_subChildren=$currentChildNode->getNbChildren();
-                    if ($nb_subChildren){
-                        
-                       echo '<ul style="padding-left:5em;">';
-                       for ($j = 1; $j <= $nb_subChildren; $j++) {
-                           $currentChildNode=$sortedNodeList[($currentNodePath.".".$i).".".$j];
-                           $childNodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ; 
-                           
-                       echo '
+    
+        
+        if ($currentChildNode->getNbChildren()){
+            echo '<ul style="padding-left:5em;">';
+            
+            $childPath = $currentNode->getNodePath() . '.' . $id_child;
+   
+            //On parcours liste de noeuds
+            foreach ($sortedNodeList as $childNodePath => $subChildNode) {
+            
+                $np = explode('.',$childNodePath);               
+
+                if (!strpos($childNodePath, $childPath)){ 
+
+
+                    if (count($np) == count($DecomposedNodePath)+2) {
+
+                        $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $subChildNode->getNodePath() ;                     
+
+                        $childNodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $subChildNode->getNodePath() ; 
+
+                        echo '
                        <div class="tache">
-                           <a href="'. $childNodeListString .'" ><h2>'.$currentChildNode->getTitle() .'</h2></a>                
+                           <a href="'. $childNodeListString .'" ><h2>'.$subChildNode->getTitle() .'</h2></a>                
                        </div>
-                       ';
-                       }
-                       echo '</ul>';
+                        ';
                     }
-            echo "</div>";
+                }
+
+               echo '</ul>';
+            }
+        }
+    echo "</div>";
     /// fin niveau 2
 
 

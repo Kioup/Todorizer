@@ -50,13 +50,15 @@
             /* Variable PHP to js */
             if (isset($_POST['ajax'])) echo '_*_*_' . count($currentProject->getNodeList());
         }
-    } 
+    }
 
     //Update description
     if (isset($_POST['description']) && isset($_POST['taskUpdate'])) {
         $id = $_POST['taskUpdate'];
         $updateNode = $currentProject->getNode($id);
+        var_dump($updateNode);
         $updateNode->setDescription($_POST['description']);
+        var_dump($updateNode);
         $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
     }
 
@@ -64,6 +66,13 @@
     //Remove node
     if (isset($_POST['id_to_remove'])) {
         $currentProject->removeNode($_POST['id_to_remove']);
+    }
+
+    if (isset($_POST['setProgress'])) {
+        $id = $_POST['setProgress'];
+        $updateNode = $currentProject->getNode($id);
+        $updateNode->setProgress($_POST['progress']);
+        $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
     }
 
     //Save session project
