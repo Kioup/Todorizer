@@ -10,7 +10,14 @@ class ProjectManager {
             $this->db = $connection->get_connection();
         }
         
-        
+        public function deleteProject($project_Id){
+            $delete= $this->db->prepare(
+                'DELETE FROM project WHERE id = ?'
+             );
+             $delete->execute( [$project_Id] );
+        }
+
+
         public function insert($id_owner) {            
             $create = $this->db->prepare(
                'INSERT INTO project ( id_owner ) VALUES ( :id_owner )'
@@ -22,13 +29,37 @@ class ProjectManager {
             return $id;
         }
 
-        public function update($project_Id, $name){
+        public function update($elementName, $elementValue, $project_Id){
             $update= $this->db->prepare(
-                'update project SET name = :name WHERE id = :id'
+                'UPDATE project SET '.$elementName.' = :elementValue WHERE id = :id'
              );
              $update->execute(
                  [
-                     'name' => $name,
+                     'elementValue' => $elementValue,
+                     'id' => $project_Id                              
+                 ]
+             );        
+        }
+
+        public function updateProjectIcon($project_Id, $iconPath){
+            $update= $this->db->prepare(
+                'update project SET icon = :icon WHERE id = :id'
+             );
+             $update->execute(
+                 [
+                     'icon' => $iconPath,
+                     'id' => $project_Id                              
+                 ]
+             );
+        }
+
+        public function updateProjectColor($project_Id, $icon_color){
+            $update= $this->db->prepare(
+                'update project SET icon_color = :icon_color WHERE id = :id'
+             );
+             $update->execute(
+                 [
+                     'icon_color' => $icon_color,
                      'id' => $project_Id                              
                  ]
              );

@@ -3,10 +3,10 @@
         session_start();
     }
 
-    var_dump($_POST);
-
-
+    //Debug
+    //var_dump($_POST);
     //define('__ENV__','prod');
+
     define('__CONTROLROOT__', 'controls/');
     define('__MODELROOT__', 'model/');
 

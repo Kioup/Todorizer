@@ -1,49 +1,61 @@
 --><main>
+<?php $nodeUri="redirect.php?projectId=" . $project->getId() . "&view=rootNodeList"; ?>
 
-<?php
-echo $project->getName();
-//$attachmentLink="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $subChildNode->getNodePath()
-
-?>
         <div class="edit">
             <div class="entete">
-            <form>
-                <input type="text" value="nom du projet">
-            </form>
+                <form method="POST" action="">
+                    <span><i class="<?php echo "fas fa-". ($project->getIcon() ?: 'folder'); ?>" style="color: <?php echo ($project->getIconColor() ?: "white") ?> "></i></span>
+                    <?php
+                        echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name" value="'.$project->getName().'" focus>';
+                    ?>
+                    <input type="hidden" id="projectID" value="<?php echo $project->getId(); ?>">
+                    <input type="hidden" name="ctrl" value="project">
+                    <input type="hidden" name="action" value="setName"> 
+                    <input type="hidden" id="projectRoot" value="1">
+                </form> 
             </div>
+            <a class="fill previousNode" href="<?php echo $nodeUri; ?>"><span>Retour</span></a>
             <div class="contenu">
                 <div>
-                    <span class="fill PJ"><i class="fas fa-paperclip"></i><p>Pièce jointe</p></span>
+                    <span class="fill icons"><i class="far fa-image"></i><p>Icone du projet</p></span>
                     <span class="fill colors"><i class="fas fa-palette"></i><p>Couleur du projet</p></span>
-                    <span class="fill notif"><i class="fas fa-envelope"></i><p>Notifications</p></span>
                     <span class="fill CR"><i class="fas fa-print"></i><p>Compte rendu</p></span>
+                    <span class="fill drop"><i class="fas fa-trash"></i><p>Suppression projet</p></span>
                 </div>
-                <form>
-                    <textarea value="description longue et fastidieuse du projet">
-                    </textarea>
-                </form>
+                <div id="projectDescription">
+                    <textarea placeholder="description longue et fastidieuse du projet"><?php echo $project->getDescription(); ?></textarea>
+                </div>
             </div>
         </div>
     </main><!--
 --><div class="overlay"></div><!--
 --><div class="popup">
-<!--         <div class="color">
-            <form method="POST" action="">
-            <input class="jscolor {onFineChange:'changeColor(this)'}" value="ffffff">
-            <p>Clickez sur le champs de texte pour le modifier</p>
-            <div>
-                <p class="pickit" id="rect"><i class="<?php echo "fas fa-" . ((isset($project) && $project->getIcon()) ? $project->getIcon() : 'folder'); ?>"></i></p>
-                <span id="roct"><i class="<?php echo "fas fa-" . ((isset($project) && $project->getIcon()) ? $project->getIcon() : 'folder'); ?>"></i></span>
-            </div>
-            <div>
-                <label class="fillR">Valider
-                    <input type="submit" value="Valider">
-                </label>
-            </div>
+        <span class="close"><i class="fas fa-times-circle"></i></span>
+        <div class="CR">
+            <?php
+            include 'view/printProject.php';    
+            ?>
+        </div>
+        <div class="colors">
+            <form action="redirect.php" method="GET">
+                <input class="jscolor {onFineChange:'changeColor(this)'}" value="<?php echo substr($project->getIconColor(),1); ?>">
+                <p>Clickez sur le champs de texte pour le modifier</p>
+                <div>
+                    <p class="pickit" id="rect"><i class="<?php echo "fas fa-" . ((isset($project) && $project->getIcon()) ? $project->getIcon() : 'folder'); ?>"></i></p>
+                    <span id="roct"><i class="<?php echo "fas fa-" . ((isset($project) && $project->getIcon()) ? $project->getIcon() : 'folder'); ?>"></i></span>
+                </div>
+                <div>
+                    <label class="fillR">Valider
+                        <input type="submit" value="Valider">
+                    </label>
+                </div>
+                <input type="hidden" name="projectColor" id="projectColor" value="<?php echo $project->getIconColor(); ?>">
+                <input type="hidden" name="page" value="projectEdit.php">
+                <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>">
             </form>
-        </div> -->
+        </div>
         <div class="icons">
-            <form method="POST" action="">
+            <form action="redirect.php" method="GET">
             <div>
                 <span class="slide-left"></span>
                 <div class="wrapper">
@@ -96,7 +108,11 @@ echo $project->getName();
                 <span class="display">
                     <i class="fas fa-folder-open"></i>
                 </span>
-                <input type="hidden" value="">
+                <input type="hidden" name="projectIcon" id="projectIcon" value="fas fa-folder-open">
+                <input type="hidden" name="page" value="projectEdit.php">
+                <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>">
+
+
             </div>
             <div>
                 <label class="fillR">Valider
@@ -104,5 +120,21 @@ echo $project->getName();
                 </label>
             </div>
         </form>
+        </div>
+        <div class="drop">
+            <form action="redirect.php" method="GET">
+                <span><i class="fas fa-exclamation-triangle"></i></span>
+                <p>La suppression du projet entrainera la perte de toutes les taches et des sous-projet associés</p>
+                <p> Voulez vous vraiment continuer ? </p>
+                <label class="fillR">Valider
+                    <input type="submit" value="Valider">
+                </label>
+                <input type="hidden" name="page" value="project.php">
+                <input type="hidden" name="delete" value="true">
+                <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>">
+            </form>
+
+        </div>
+        <div class="rien">
         </div>
 </div>

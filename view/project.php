@@ -5,7 +5,6 @@
 <?php
     echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name" value="'.$currentProject->getName().'" focus>';
 ?>
-                <a href="<?php $url->get('projectEdit.php'); ?>"><span class="tool"><i class="fas fa-wrench"></i></span></a>
 
                 <!--<input class="jscolor" onchange="changeColor(this.jscolor)">-->
                 <input type="hidden" name="ctrl" value="project">
@@ -14,7 +13,7 @@
             </form> 
         </div>
         <div class="list">
-            <h2 class="underline"> Groupe de taches </h2>                
+            <h2 class="underline"> Votre liste : </h2>                
             <form method="POST" action="">
             <div class="form-block block-task" id="block-task">
                 <?php
@@ -27,7 +26,7 @@
                 ?>
             </div>
             <div class="form-block new">
-                <input type="text" placeholder="Nouveau"><!--
+                <input type="text" placeholder="Nouvelle tâche"><!--
                 --><a href="#" class="newPro"><i class="fas fa-plus-square"></i></a>  
             </div>
                 <input type="hidden" name="id_project" value="0">

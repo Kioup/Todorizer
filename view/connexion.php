@@ -6,6 +6,10 @@
                 <span><i class="fa fa-user"></i></span>
             </div>
             <div class="contenu">
+                <div class="alert" style="display:<?php echo ((isset($error) && $error) ? 'block' : 'none'); ?>">
+                    <span><i class="fas fa-exclamation-triangle"></i></span>
+                    <p> Vous n'avez pas entré les bons identifiants. Veuillez réessayer !</p>
+                </div>
                 <form class="log"  method="POST" action="">
                     <input type="email" placeholder="Email" name="email" required>
                     <input type="hidden" value="login" name="page" required>

@@ -15,8 +15,8 @@ $().ready(function(){
                 dataType : 'html',
                 success : function(gna){
                     /*Debug */
-                    $('body').before(gna);
-                    console.log(this.data);
+                    //$('body').before(gna);
+                    //console.log(this.data);
                 }
                 
             });
@@ -38,8 +38,8 @@ $().ready(function(){
             dataType : 'html',
             success : function(gna){
                 /*Debug */
-                $('body').before(gna);
-                console.log(this.data);
+                //$('body').before(gna);
+                //console.log(this.data);
                 var pos = gna.indexOf("_*_*_");
                 var id = gna.slice(pos + 5).split(":");
                 $('.tache').last().append("<input type='hidden' name='taskUpdate' value='"+id[0]+"'>");
@@ -61,15 +61,13 @@ $().ready(function(){
             dataType : 'html',
             success : function(gna){
                 /* Debug */
-                $('body').before(gna);
-                console.log(this.data);
+                //$('body').before(gna);
+                //console.log(this.data);
             }
         });
     };
     
     updateN = function(id,type,value) {
-        console.log("ypo");
-        console.log($("#projectID").val());
         $.ajax({
             url : 'controls/ajaxController.php',
             type : 'post',
@@ -82,8 +80,8 @@ $().ready(function(){
             dataType : 'html',
             success : function(gna){
                 /*Debug */
-                $('body').before(gna);
-                console.log(this.data);
+                //$('body').before(gna);
+                //console.log(this.data);
             }
         });
     };
@@ -93,18 +91,37 @@ $().ready(function(){
             url : 'controls/ajaxController.php',
             type : 'post',
             data : {
-                setProgress: id,
+                id_node: id,
                 id_project: $("#projectID").val(),
                 progress: value,
-                ajax: true
+                ajax: 'checkNode'
             },
             dataType : 'html',
             success : function(gna){
                 /* Debug */
-                $('body').before(gna);
+                //$('body').before(gna);
+                //console.log(this.data);
             }
         });
-    }
+    };
+    
+    projectDesc = function (value) {
+        $.ajax({
+            url : 'controls/ajaxController.php',
+            type : 'post',
+            data : {
+                id_project: $("#projectID").val(),
+                description: value,
+                ajax: "descProject"
+            },
+            dataType : 'html',
+            success : function(gna){
+                /* Debug */
+                //$('body').before(gna);
+                //console.log(this.data);
+            }
+        });      
+    };
     
     
 });
@@ -134,12 +151,22 @@ function ajaxRemoveNode(elem) {
         }
     });
 }
+function ajaxDescProject(elem) {
+    elem.focusout(function(e){
+       projectDesc($(e.target).val()); 
+    });
+}
+
 function ajaxUpdateNode(elem) {
     elem.focusout(function(e){
+        
         var e = $(e.target);
+        console.log(e);
         var value = e[0].value;
         if (value != "") {
             var type = e.data('type');
+            console.log(e.parents('.tache'));
+            
             var child = e.parents('.tache').children('.taskUpdate')[0];
             var id = child.value;
             updateN(id, type, value);

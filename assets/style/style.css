@@ -470,19 +470,31 @@ main div.entete span {
 
 }
 
-main div.entete span.tool {
+main div.entete div.tool {
+    float: right;
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+}
+
+main div.entete div.tool a {
+    display: inline-block;
+    width: 100%;
+    height: 100%;
+}
+
+main div.entete div.tool span {
     position: absolute;
     top: 50%;
     display: inline-block;
     transform: translateY(-50%);
     font-size: 2em;
-    right: 40px;
     transition: all 0.5s;
     cursor: pointer;
     transform-origin: top right;
 }
 
-main div.entete span.tool:hover {
+main div.entete div.tool span:hover {
     transform: rotate(70deg);
 }
 
@@ -499,6 +511,43 @@ main div.list form {
     width: 100%;
 }
 
+main div.node div.tache div.tache, main div.nodeList div.tache div.tache {
+    text-align: left;
+}
+
+main div.node, main div.nodeList {
+    padding: 0 100px;
+}
+
+main div.node div.tache div.tache a, main div.nodeList div.tache div.tache a {
+    text-decoration: none;
+}
+
+main div.node div.tache div.tache a h2 {
+    font-size: 1em;
+}
+
+main div.nodeList div.tache.maitre {
+    padding: 0;
+    border: 0;
+    border-bottom: solid 1px lightblue;
+    text-align: left;
+    font-size: 1.1em;
+    background-color: none;
+}
+
+main div.nodeList div.tache div.tache h2 {
+    font-size: 0.9em;
+    text-align: left;    
+}
+
+
+main div.nodeList div.tache.maitre input {
+    border: 0;
+    font-family: "Comfortaa", Arial, Helvetica, sans-serif;
+}
+
+
 main div.list form input[type="text"], main div.contenu form.log input[type="text"], main div.contenu form.log input[type="email"], main div.contenu form.log input[type="password"]{
     width: calc(100% - 100px);
     padding: 2px;
@@ -514,10 +563,6 @@ main div.list form input[type="text"], main div.contenu form.log input[type="tex
     vertical-align: middle; 
 }
 
-main div.list div.tache {
-    cursor: grab;
-}
-
 main div.list div.tache, main div.list div.new {
     background-color: none;
     padding: 5px 10px;
@@ -530,16 +575,23 @@ main div.list div.tache, main div.list div.new {
     border: solid 1px white;
 }
 
-main div.list form div.alert {
+main div.alert {
+    background-color: #a53741;
+}
+
+main div.success {
+    background-color: #007e39;
+}
+
+main div.list form div.alert, main div.contenu > div.alert, main div.contenu > div.success {
     width: calc(100% - 50px);
     color: white;
     position: relative;
-    background-color: #a53741;
     padding: 5px;
     margin: 15px 0;
 }
 
-main div.list form div.alert i {
+main div.list form div.alert i, main div.contenu > div.alert i, main div.contenu > div.success i {
     font-size: 1.5em;
     height: 50px;
     margin: 0 10px;
@@ -549,13 +601,46 @@ main div.list form div.alert i {
 
 }
 
-main div.list form div.alert p {
+main div.list form div.alert p, main div.contenu > div.alert p, main div.contenu > div.success p {
     display: inline-block;
     font-size: 1.1em;
     text-align: center;
     font-family: "Roboto Mono", Arial, sans-serif;
-    width: calc(100% - 70px);
+    width: calc(100% - 90px);
     vertical-align: middle;
+}
+
+
+main div.list .tache .child .tache {
+    border: 0;
+    margin: 5px 0;
+} 
+
+main div.list .tache .child {
+    transition: all 0.1s;
+}
+
+main div.list .tache .child:hover {
+    background: #7fbdf266;
+    transform: translateX(10px)
+}
+
+main div.list .tache .child .tache h2 {
+    vertical-align: middle;
+    display: inline-block;
+    width: calc(100% - 20px);
+    font-size: 1em;
+}
+
+main div.list .tache .child .tache:before {
+    content: "";
+    display: inline-block;
+    margin: 0 5px;
+    width: 5px;
+    height: 5px;
+    background: white;
+    vertical-align: middle;
+    border-radius: 50%;
 }
 
 main div.list form input[type="text"] + a,  main div.list form input[type="text"] ~ span{
@@ -603,6 +688,10 @@ main div.list form div.tache div.develop div {
     font-size: 1.5em;
 }
 
+main div.list form div.tache div.develop div a {
+    color: white;
+}
+
 main div .suppr {
     text-align: center;
 }
@@ -645,26 +734,28 @@ main div.edit {
     margin: 0 auto;
 }
 
-main div.edit span {
+main div.edit div.contenu span {
     width: 150px;
     height: 150px;
     display: inline-block;
-    margin: 0 20px;
+    margin: 10px 20px;
     padding: 10px;
 }
 
 main div.edit div.contenu div{
     margin: 30px auto;
     text-align: center;
-    width: 780px;
+    max-width: 780px;
+    width: 100%;
 }
 
 main div.edit div.contenu div + form {
-    width: 780px;
+    width: 100%;
+    max-width: 780px;
     margin: 0 auto;
 }
 
-main div.edit span i {
+main div.edit div.contenu span i {
     font-size: 2.5em;
     margin: 20px 0;
 }
@@ -681,11 +772,60 @@ main div.edit span p {
     line-height: 1em;
 } 
 
+main div.projectDescription strong {
+    font-size: 1.1em;
+    font-weight: bold;
+}
+
+main div.projectDescription {
+    color: white;
+    padding: 0 60px;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+}
+
+/* 
+   ######################################################################
+                         main, fil d'ariane
+   ######################################################################
+*/
+main div.ariane {
+    padding: 0 10px;
+}
+
+main div.ariane span i {
+    color : white;
+    margin: 5px 10px;
+}
+
+main div.ariane a {
+    text-decoration: none;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+    border: solid 1px white;
+    border-radius: 5px;
+    color: white;
+    padding: 5px 20px;
+    text-align: center;
+    font-size: 0.8em;
+}
+
 /* 
    ######################################################################
                          main, popup
    ######################################################################
 */
+
+div.popup div.icons, div.popup div.color, div.popup div.rien {
+    display: none;
+}
+
+div.popup span.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    color: black;
+    font-size: 1.5em;
+    display: inline-block;
+}
 
 div.overlay {
     background-color: black;
@@ -712,11 +852,12 @@ div.popup {
     border-radius: 8px;
     box-shadow: 4px 4px 4px 1px black;
     transform: translate(-50%, -50%);
-    width: auto;
+    width: 100%;
+    overflow: scroll;
     opacity: 0;
     padding: 20px;
     transition: all 0.5s;
-    min-width: 640px;
+    max-width: 640px;
     height: 480px;
     z-index: 2;
 }
@@ -728,32 +869,35 @@ div.popup.in {
 
 /* color */
 
-div.popup .color {
+div.popup .colors {
     text-align: center;
 }
 
-div.popup .color > p {
+div.popup .colors form > p {
     font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
     font-size: 1.1em;
     margin: 20px 0;
     text-align: center;
 }
 
-div.popup .color div {
+div.popup .colors div {
     text-align: center;
 }
 
-div.popup .color div > span, div.popup .color div > p {
+div.popup .colors div > span, div.popup .colors div > p {
     display: inline-block;
     width: 160px;
     height: 160px;
     border: solid 1px lightgray;
     text-align: center;
     font-size: 4em;
+}
+
+div.popup .colors div > span > i, div.popup .colors div > p > i {
     line-height: 160px;
 }
 
-div.popup .color div .fillR input {
+div.popup .colors div .fillR input {
     display: none;
 }
 
@@ -830,6 +974,62 @@ div.icons span.display {
     height: 100px;
     font-size: 4em;
     color: black;
+}
+
+/* suppression projet */
+
+div.drop {
+    text-align: center;
+}
+
+div.drop span {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    color: black;
+    font-size: 2.5em;
+    margin: 30px 0;
+}
+
+div.drop p {
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 20px 0;
+}
+
+div.drop p:nth-of-type(1) {
+    text-align: left;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+    font-size: 1em;
+    font-weight: normal;
+    margin: 10px 0;
+}
+
+div.drop .fillR input {
+    display: none;
+}
+
+/* Pièce jointe */
+
+div.PJ div.drop {
+    width: 100%;
+    height: 100%;
+    display: block;
+    border: dashed blue 10px;
+}
+
+div.PJ div.drop p {
+    vertical-align: middle;
+    margin: auto;
+    color: black;
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
+}
+
+/* popup date */
+
+.date {
+    font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
 }
 
 

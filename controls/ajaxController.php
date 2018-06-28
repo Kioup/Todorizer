@@ -11,19 +11,18 @@ $projectManager=new ProjectManager();
 $nodeManager=new NodeManager();
 $nodeController=new NodeController();
 
-//var_dump($_POST);
-
 
 if (isset($_POST['ajax'])){
     //$_SESSION['project']=false;    
     switch($_POST['ajax']){
         case "nameProjectUpdate":
-           $projectManager->update($_POST['id_project'], $_POST['name']);
+           $projectManager->update("name", $_POST['name'],$_POST['id_project']);
             break;
 
         case "titleNodeUpdate":
             echo "VALUE: ". $_POST['value'];
-            $nodeManager->update_title($_POST['value'], $_POST['nodeId']);
+            //$nodeManager->update_title($_POST['value'], $_POST['nodeId']);
+            $nodeManager->update_nodeElement("title",$_POST['value'], $_POST['nodeId']);
             break;
              
         case "descriptionNodeUpdate":
@@ -41,7 +40,6 @@ if (isset($_POST['ajax'])){
 
         case "addNode":
             $newNode=$nodeController->createNode();            
-            var_dump($_POST);
             $id_project=$_POST['id_project'];
 
             if (!isset($_POST['id_parent'])){
@@ -65,9 +63,18 @@ if (isset($_POST['ajax'])){
             //Very important, NO REMOVE!
             echo "_*_*_" . $newId . ":" . $newNodePath;
             break;
-      
+
+        case "checkNode":
+            $node_Id=$_POST['id_node'];
+            $progress=$_POST['progress'];
+            $nodeManager->update_nodeElement("progress", $progress, $node_Id);
+            break;
+        
+        case "descProject":
+            $projectManager->update("description", $_POST['description'],$_POST['id_project']);
+            break;
     }
-echo "##### ". $_POST['id_project'];
+
     $project=$projectManager->extract_Project($_POST['id_project']);
     $nodeList=$nodeManager->extract_ProjectNodes($project);
 
@@ -77,6 +84,7 @@ echo "##### ". $_POST['id_project'];
     }
     $project->setNodeList($sortedNodeList);
     $_SESSION['project']=serialize($project);
+
 
 }
 

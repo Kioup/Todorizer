@@ -1,5 +1,4 @@
-
-    --><main>
+--><main>
     <section class="dash-mobile">
         <div class="titre">
             <h2 class="underline">Projets</h2>
@@ -29,7 +28,7 @@
                     <form method="POST" action="">
                         <input type="hidden" name="projectId" value=""> 
                         <input type="hidden" name="view" value="">
-                        <a href="#" onclick="this.parentNode.submit()" >
+                        <a href="redirect.php?page=newProject.php">
                             <p>Nouveau</p>
                             <span><i class="fas fa-folder"></i></span>
                             <span><i class="fas fa-plus-circle"></i></span>

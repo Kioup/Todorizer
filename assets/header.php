@@ -32,6 +32,8 @@
             width: 100vw;
             background: white;
             z-index: 999;
+            display:flex;
+            justify-content: center;
         ">
             <div class="loader" style="
                 border-top: 16px solid blue;
@@ -42,10 +44,7 @@
                 width: 120px;
                 height: 120px;
                 animation: spin 1s linear infinite;
-                position: absolute;
-                top: 50%;
-                left: 50%;
-                transform: translate(-50%, -50%);
+                align-self: center;
             "></div>
         </div>
         <script>

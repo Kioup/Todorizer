@@ -56,9 +56,7 @@
     if (isset($_POST['description']) && isset($_POST['taskUpdate'])) {
         $id = $_POST['taskUpdate'];
         $updateNode = $currentProject->getNode($id);
-        var_dump($updateNode);
         $updateNode->setDescription($_POST['description']);
-        var_dump($updateNode);
         $currentProject = $projectController->updateNode($currentProject, $updateNode, $id);
     }
 

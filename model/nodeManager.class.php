@@ -11,8 +11,11 @@ class NodeManager {
         require_once(__MODELROOT__.'node.class.php');
         
         $connection = new Connection();
-     //   $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        
         $this->db = $connection->get_connection();
+        
+        //Debug
+        //$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
 
@@ -29,7 +32,6 @@ class NodeManager {
                 'id_child' => $node->getIdChild(),
             ]
         );
-        //var_dump($create);
         $id = $this->db->lastInsertId();
         return $id;
     }
@@ -71,16 +73,46 @@ class NodeManager {
         return $request[0];
     }
 
-    public function update_title($title, $node_Id){
+
+    // ex: 
+    // elementName= "title", "start_date", etc.
+    // elementValue= "mon beau titre", "27/06/2018", etc.
+
+    public function update_nodeElement($elementName, $elementValue, $node_Id){
         $update= $this->db->prepare(
-            'UPDATE node SET title = :title WHERE id = :id'
+            'UPDATE node SET '.$elementName.' = :elementValue WHERE id = :id'
          );
          $update->execute(
              [
-                 'title' => $title,
+                 'elementValue' => $elementValue,
                  'id' => $node_Id                              
              ]
+         );        
+    }
+
+    public function update_start_dateNode($date, $node_Id){
+        ECHO "###node_Id".$node_Id;
+        $update= $this->db->prepare(
+            'UPDATE node SET start_date = :date WHERE id = :id'
          );
+         $update->execute(
+             [
+                 'date' => $date,
+                 'id' => $node_Id                              
+             ]
+         );  
+    }
+    public function update_end_dateNode($date, $node_Id){
+        ECHO "###node_Id".$node_Id;
+        $update= $this->db->prepare(
+            'UPDATE node SET end_date = :date WHERE id = :id'
+         );
+         $update->execute(
+             [
+                 'date' => $date,
+                 'id' => $node_Id                              
+             ]
+         );  
     }
 
     public function update_nb_children($id,$nb_children,$children){

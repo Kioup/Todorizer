@@ -1,5 +1,7 @@
+<!-- NODE -->
 <?php                        
  $check = ($currentChildNode->getProgress() == 10) ? 'checked' : '';
+ $childNodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $currentChildNode->getNodePath() ; 
  ?>
 
 <div class="tache">
@@ -33,10 +35,9 @@
 <?php
 
 // affichage noeuds niveau 2:                  
-    
+echo ' <a href="'. $childNodeListString .'" ><div class="child">';  
         
         if ($currentChildNode->getNbChildren()){
-            echo '<ul style="padding-left:5em;">';
             
             $childPath = $currentNode->getNodePath() . '.' . $id_child;
    
@@ -47,26 +48,22 @@
 
                 if (!strpos($childNodePath, $childPath)){ 
 
-
                     if (count($np) == count($DecomposedNodePath)+2) {
-
-                        $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $subChildNode->getNodePath() ;                     
-
-                        $childNodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $subChildNode->getNodePath() ; 
 
                         echo '
                        <div class="tache">
-                           <a href="'. $childNodeListString .'" ><h2>'.$subChildNode->getTitle() .'</h2></a>                
+                          <h2>'.$subChildNode->getTitle() .'</h2>               
                        </div>
                         ';
                     }
                 }
-
-               echo '</ul>';
             }
         }
+    echo "</div></a> ";
+
     echo "</div>";
     /// fin niveau 2
 
 
 ?>
+<!-- END NODE -->

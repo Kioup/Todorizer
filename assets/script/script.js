@@ -1,17 +1,23 @@
 var drag;
-
 // Insérer du javascript dans ce fichier
-$(document).ready(function(){
+$(document).ready(start);
+
+function start(){
+    
+    if ($('#projectColor').length){
+        document.getElementById('rect').style.backgroundColor = $('#projectColor').val();
+        document.getElementById("roct").style.color = $('#projectColor').val();
+    }
+    
 
     $(".list .form-block a.newPro").on("click", createTask);
-
-    //$(".trash").on("click", rmTask);
     
     updateNode($(".tache").children("input[type=text]"));
     progress($(".checkmark"));
     updateNode($(".tache").find("textarea"));
     removeNode($(".tache").find(".trash"));
-    drag = dragula([document.getElementById("block-task")]);
+    descProject($("#projectDescription").children('textarea'));
+    //drag = dragula([document.getElementById("block-task")]);
 
     $( ".deploi" ).click(function() {
         var icone = $(this).parent().find(".deploi").find("i");
@@ -27,29 +33,64 @@ $(document).ready(function(){
         }
     });
 
-    $("div.edit div.contenu div span.fill").on("click", showHidePopup);
+
+    $("div.edit div.contenu span.fill").on("click", showHidePopup);
     $("div.overlay").on("click", showHidePopup);
+    $("div.popup .close").on("click", showHidePopup);
+
     $("div.popup .slide-left").on("click", slideLeft);
     $("div.popup .slide-right").on("click", slideRight);
+    $("div.popup .fa-list-ul").parent().on("click", slideLeft);
+    $("div.popup .fa-suitcase").parent().on("click", slideRight);
 
-});
+
+    
+    
+}
+
+
 
 var showHidePopup = function() {
+
     $("div.overlay").toggleClass('in');
+    
     display = $("div.popup").css("display");
-    $("div.popup").toggleClass('in');    
+    
+    $("div.popup").toggleClass('in');
+    
     if ( display == "none" ) {
         $( "div.popup" ).show( 200 );
-      } 
-    else {
+    } else {
         $( "div.popup" ).hide( 200 );
-      }
-    $("div.icons .mini-slider").css("left", - ($("div.icons span.selected").position().left) + 80);
+    }
+
+    $("div.popup > div").css("display", "none");
+
+
+
+
+
+    if ($(this).hasClass("colors")) $("div.popup div.colors").css("display", "block");
+
+    if ($(this).hasClass("icons")) $("div.popup div.icons").css("display", "block");
+
+    if ($(this).hasClass("CR")) $("div.popup div.CR").css("display", "block");
+
+    if ($(this).hasClass("drop")) $("div.popup div.drop").css("display", "block");
+    
+    if ($(this).hasClass("PJ")) $("div.popup div.PJ").css("display", "block");
+    
+    if ($(this).hasClass("date")) $("div.popup div.date").css("display", "block");
+
+    var el = $("div.icons span.selected").position().left;
+    $("div.popup div.icons .mini-slider").css("left", -(el - 80));
+    
+
+
 }
 
 var slideLeft = function(){
     slide(1)
-
 }
 
 var slideRight = function(){
@@ -64,7 +105,12 @@ var slide = function(sens) {
     var newEl = sens ? el.prev() : el.next();
     if (newEl.length) {
         el.removeClass("selected");
+        el.prev().unbind('click',slideLeft);
+        el.next().unbind('click',slideRight);
         newEl.addClass("selected");
+        newEl.prev().bind('click',slideLeft);
+        newEl.next().bind('click',slideRight);
+        $('#projectIcon').val(newEl.children('i').attr('class'));
         var pos = el.position().left;
         if (sens) pos -= 160;
         slider.css("left", -(pos));
@@ -87,6 +133,9 @@ function updateNode(e) {
 function removeNode(e) {
     ajaxRemoveNode(e);
 }
+function descProject(e) {
+    ajaxDescProject(e);
+}
 function progress(e) {
     ajaxProgressNode(e);
 }
@@ -104,13 +153,14 @@ function createTask(e){
             $("div.alert").remove();
             input.value = "";
             input.focus();
-            drag.containers.push($(".tache").last());
+            //drag.containers.push($(".tache").last());
             updateNode($(".tache").last().children("input[type=text]"));
             progress($(".checkmark").last());
             updateNode($(".tache").last().find("textarea"));
             removeNode($(".tache").last().find(".trash"));
+            
             //drag = dragula([document.getElementById("block-task")]);
-            //$(".trash").last().on("click", rmTask);
+            
             $( ".deploi" ).last().click(function() {
                 var icone = $(this).parent().find(".deploi").find("i");
                 var deploi = $(this).next(".develop");
@@ -143,4 +193,5 @@ function changeColor(jscolor) {
     // 'jscolor' instance can be used as a string
     document.getElementById('rect').style.backgroundColor = '#' + jscolor;
     document.getElementById("roct").style.color = '#' + jscolor;
+    $('#projectColor').val('#' + jscolor);
 }

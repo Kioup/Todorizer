@@ -1,12 +1,7 @@
-<?php
-session_start();
-$url = ((isset($_SESSION['env'])) && ($_SESSION['env'] == 'dev')) ? "http://localhost/todorizer/" : "http://todorizer.santhor.com/";  
-?>
-
-<form id="redirectForm" action="<?php echo $url; ?>" method="POST">
+<form id="redirectForm" action="http://todorizer.santhor.com/" method="POST">
     <?php
-        foreach ($_GET as $a => $b) {
-            echo '<input type="hidden" name="'.htmlentities($a).'" value="'.htmlentities($b).'">';
+        foreach ($_GET as $name => $value) {
+            echo '<input type="hidden" name="'.htmlentities($name).'" value="'.htmlentities($value).'">';
         } 
     ?>
 </form>

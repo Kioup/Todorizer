@@ -17,10 +17,14 @@ Class LoggedController{
         $this->nodeManager= new NodeManager();
         $this->projectManager=new ProjectManager();
         $this->projectController=new ProjectController();
+        $this->nodeController=new NodeController();
         $this->url=new URL();
         $this->id_user=$id_user;
     }   
 
+    public function deleteProject($id_project){
+        $this->projectManager->deleteProject($id_project);
+    }
 
     public function displayAllProjects(){
         $projectList=$this->projectManager->extract_allProjects($this->id_user);
@@ -30,36 +34,96 @@ Class LoggedController{
     public function createNewProject(){
         $projectList=$this->projectManager->extract_allProjects($this->id_user);
         $id = false;
-        foreach ($projectList as $extractedProject){
-            if ($extractedProject->getName()==""){
-                $id = $extractedProject->getId();
+        if ($projectList) {
+            foreach ($projectList as $extractedProject){
+                if ($extractedProject->getName()==""){
+                    $id = $extractedProject->getId();
+                }
             }
-        }        
+            
+        }
+        
         if(!$id) $id=$this->projectManager->insert($this->id_user);
         $this->displayRootNodes($id);
     }
 
+    public function update_start_dateNode($date, $id_node){
+        $this->nodeManager->update_start_dateNode($date,$id_node);
+    }
+
+    public function update_end_dateNode($date, $id_node){
+        $this->nodeManager->update_end_dateNode($date,$id_node);
+    }
+
+    public function updateProjectIcon($id_project, $iconPath){
+        unset( $_SESSION['project']);
+        $this->projectManager->updateProjectIcon($id_project, $iconPath);
+    }
+
+    public function updateProjectColor($id_project, $color){
+        unset( $_SESSION['project']);        
+        $this->projectManager->updateProjectColor($id_project, $color);
+    }
+
     public function editProject($id_project){    
-        $project=unserialize($_SESSION['project']);        
+        if (isset($_SESSION['project'])) {
+            $project = unserialize($_SESSION['project']);
+        } else  {
+            $project=$this->projectManager->extract_Project($id_project);
+            $nodeList=$this->nodeManager->extract_ProjectNodes($project);
+            $_SESSION['project'] = serialize($project);
+        }
+
         $this->url->showHeaderCON();
         include 'view/projectEdit.php'; 
+    }
+
+    public function update_nodeElement($elementName, $elementValue, $node_Id){   
+        unset( $_SESSION['project']);        
+        $this->nodeManager->update_nodeElement($elementName, $elementValue, $node_Id);
+    }
+    
+    public function editNode($id_project, $id_node){    
+        if (isset($_SESSION['project'])) {
+            $project = unserialize($_SESSION['project']);
+            $nodeList = $project->getNodeList();
+        } else  {
+            $project=$this->projectManager->extract_Project($id_project);
+            $nodeList=$this->nodeManager->extract_ProjectNodes($project);
+            $_SESSION['project'] = serialize($project);
+        }
+        
+        // conversion de la liste de noeuds en tableau associatif:
+        $sortedNodeList=$this->sortNodeList($nodeList);
+
+        // récup du noeud courrant:
+        $currentNode=$sortedNodeList[$id_node];
+
+        $this->url->showHeaderCON();
+        include 'view/nodeEdit.php'; 
     }
     
     public function displayRootNodes($id_project){
         $p = false;
-        if (isset($_SESSION['project'])) {
+        if (isset($_SESSION['project']) && !empty($_SESSION['project'])) {
             $project = unserialize($_SESSION['project']);
             if ($project->getId() != $id_project) $p = true;
+        } else {
+            $p = true;
         }
         if ($p) {
             $project=$this->projectManager->extract_Project($id_project);
-            $nodeList=$this->nodeManager->extract_ProjectNodes($project);
-    
-            $sortedNodeList=$this->sortNodeList($nodeList);
-            $project->setNodeList($sortedNodeList);
-            $_SESSION['project']=serialize($project);
+            if ($project) {
+                $nodeList=$this->nodeManager->extract_ProjectNodes($project);
+                    if ($nodeList) {
+                        $sortedNodeList=$this->sortNodeList($nodeList);
+                        $project->setNodeList($sortedNodeList);
+                    }
+                $_SESSION['project']=serialize($project); 
+            } else {
+                $this->createNewProject();
+            }
         }
-
         $this->url->showHeaderCON();
         include 'view/rootNodeList.php'; 
     }

@@ -1,4 +1,6 @@
 --><main>
+<div class="ariane">
+</div>
 <?php
     $editProjectLink="redirect.php?projectId=" . $project->getId() . "&page=projectEdit.php"; 
 ?>
@@ -9,19 +11,21 @@
 <?php
 echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name" value="'.$project->getName().'" focus>';
 ?>
-        <span class="tool"><i class="fas fa-wrench"></i></span>
         <input type="hidden" id="projectID" value="<?php echo $project->getId(); ?>">
         <input type="hidden" name="ctrl" value="project">
         <input type="hidden" name="action" value="setName"> 
         <input type="hidden" id="projectRoot" value="1">
 
-        <a href="<?php echo $editProjectLink; ?>"><span class="tool"><i class="fas fa-wrench"></i></span></a>
-        <input type="hidden" name="ctrl" value="project">
-        <input type="hidden" name="action" value="setName"> 
-        <input type="hidden" id="projectRoot" value="1">
+        <div class="tool"><a href="<?php echo $editProjectLink; ?>"><span><i class="fas fa-wrench"></i></span></a></div>
     </form> 
 </div>
-<div class="list">
+<?php if ($project->getDescription()) { ?>
+<div class="projectDescription">
+    <strong>Description : </strong>
+    <?php echo $project->getDescription(); ?>    
+</div>
+<?php } ?>
+<div class="list node">
     <form method="POST" action="">
     <div class="form-block block-task" id="block-task">
         <?php
@@ -38,7 +42,7 @@ echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name
         ?>
     </div>
     <div class="form-block new" id="rootNodeList">
-        <input type="text" placeholder="Nouveau"><!--
+        <input type="text" placeholder="Nouvelle tâche"><!--
         --><a href="#" class="newPro"><i class="fas fa-plus-square"></i></a>  
     </div>
         <input type="hidden" name="id_project" value="0">

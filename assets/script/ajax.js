@@ -97,7 +97,9 @@ $().ready(function(){
 }),(jQuery);
 
 
-
+function ajaxDescProject(e) {
+    
+}
 function ajaxAddNode(t) {
     add(t);
 }

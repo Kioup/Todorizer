@@ -11,8 +11,11 @@
             <span><i class="fa fa-user"></i></span>
             <p>Profil</p>
         </a>
-        <a href="#">
-            <span><i class="fas fa-filter"></i></span>
-            <p>Filtrer</p>
+
+        <br><br><br><br>
+
+        <a href="<?php $url->get('deco'); ?>">
+            <span><i class="fas fa-sign-out-alt "></i></span>
+            <p>Déconnexion</p>
         </a>
     </aside><!--

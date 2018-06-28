@@ -6,6 +6,14 @@
     main div.list {
         padding: 20px 40px;
     }
+
+    main div.edit {
+        padding: 0 40px;
+    }
+
+    main div.edit textarea{
+        width: 100%;
+    }
 }
 
 @media screen and (max-width: 768px) {
@@ -27,6 +35,14 @@
     header, main {
         margin-left: 100px;
         width: calc(100% - 100px);
+    }
+
+    main div.edit {
+        padding: 0 20px;
+    }
+
+    div.popup {
+        width: calc(100% - 20px);
     }
 }
 
@@ -52,14 +68,17 @@
     main div.entete {
         margin: 5px;
         padding: 5px 0;
+        border: none;
+        font-size: 0.9em;
     }
 
-    main div.entete span {
+    main div.entete span, main div.entete span.tool {
         margin: 0 5px;
+        font-size: 1.5em;
     }
 
     main div.entete input[type="text"] {
-        width: calc(100% - 90px);
+        width: calc(100% - 75px);
     }
 
     header {
@@ -70,8 +89,9 @@
         right: 0;
     }
 
-    main div.list form div.alert {
+    main div.list form div.alert, main div.contenu > div.alert, main div.contenu > div.success  {
         width: 100%;
+        font-size: 0.8em;
     }
 
     header, main {
@@ -105,12 +125,23 @@
         margin: 5px 0;
         padding: 5px;
         text-align: left;
+        font-size: 0.8em;
     }
 
     main div.list div.tache input, main div.list div.new input {
         margin: 0;
         margin-left: 30px;
-        width: calc(100% - 80px);
+        width: calc(100% - 45px);
+    }
+
+
+    main div.list div.tache > input + span, main div.list div.new input + a {
+        width: 10px;
+    }
+
+    main div.child {
+        padding-left: 15px;
+        margin-top: 10px;
     }
 
     main div.list div.tache .container input {
@@ -123,7 +154,7 @@
     }
 
     main div.list div.tache .container .checkmark {
-        top: -20px;
+        top: -24px;
     }
 
     .dash-mobile + * {
@@ -137,5 +168,27 @@
 
     div.dashboard ul li span i {
         font-size: 2.5em;
+    }
+
+    main div.ariane span {
+        display: block;
+    }
+    
+    main div.ariane a {
+        padding: 1px 5px;
+        font-size: 0.7em;
+        border: solid 1px white;
+    }
+
+    main div.edit {
+        padding: 0 10px;
+    }
+
+    main div.edit textarea{
+        font-size: 0.8em;
+    }
+
+    div.popup .fillR {
+        width: 150px;
     }
 }

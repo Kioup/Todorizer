@@ -1,10 +1,13 @@
+<!--  ROOT NODE -->
+
 <?php
     $nodeListString="redirect.php?projectId=" . $project->getId() . "&view=nodeList&nodePath=" . $node->getNodePath() ; 
+    $check = ($node->getProgress() == 10) ? 'checked' : '';
 ?>
 
 <div class="tache">
     <label class="container">
-        <input type="checkbox">
+        <input type="checkbox" <?php echo $check; ?>>
         <span class="checkmark"></span>
     </label>
     <input type="text" value="<?php echo $node->getTitle(); ?>" data-type="title" >
@@ -30,7 +33,7 @@
 <?php
 
     //// niveau 2:
-        echo '<div style="padding-left:5em;">';
+        echo '<a href="'. $nodeListString .'" ><div class="child">';
 
             foreach ($project->getNodeList() as $currentChildNode){       
 
@@ -42,13 +45,15 @@
                     
                 echo '
                 <div class="tache">
-                    <a href="'. $childNodeListString .'" ><h2>'.$currentChildNode->getTitle() .'</h2></a>                
+                    <h2>'.$currentChildNode->getTitle() .'</h2>                
                 </div>
                 ';
                 }      
             } 
-            echo "</div>";
+            echo "</div></a>";
     /// fin niveau 2
 
 echo "</div>";
 ?>
+
+<!-- END ROOT NODE -->
