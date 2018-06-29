@@ -36,11 +36,8 @@ Class LoggedController{
         $id = false;
         if ($projectList) {
             foreach ($projectList as $extractedProject){
-                if ($extractedProject->getName()==""){
-                    $id = $extractedProject->getId();
-                }
-            }
-            
+                if ($extractedProject->getName()=="") $id = $extractedProject->getId();
+            } 
         }
         
         if(!$id) $id=$this->projectManager->insert($this->id_user);
@@ -109,7 +106,7 @@ Class LoggedController{
         $p = false;
         if (isset($_SESSION['project']) && !empty($_SESSION['project'])) {
             $project = unserialize($_SESSION['project']);
-            if ($project->getId() != $id_project) $p = true;
+            if ($project->getId() != $id_project || !$project->getNodeList()) $p = true;
         } else {
             $p = true;
         }
@@ -117,10 +114,10 @@ Class LoggedController{
             $project=$this->projectManager->extract_Project($id_project);
             if ($project) {
                 $nodeList=$this->nodeManager->extract_ProjectNodes($project);
-                    if ($nodeList) {
-                        $sortedNodeList=$this->sortNodeList($nodeList);
-                        $project->setNodeList($sortedNodeList);
-                    }
+                if ($nodeList) {
+                    $sortedNodeList=$this->sortNodeList($nodeList);
+                    $project->setNodeList($sortedNodeList);
+                }
                 $_SESSION['project']=serialize($project); 
             } else {
                 $this->createNewProject();
@@ -131,13 +128,28 @@ Class LoggedController{
     }
 
     public function displayNodes($id_project,$currentNodePath){
-        //$nb_children=null;
-        if (isset($_SESSION['project'])) {
+        if (isset($_SESSION['project']) && !empty($_SESSION['project'])) {
             $project = unserialize($_SESSION['project']);
-            $nodeList = $project->getNodeList();
-        } else  {
+            if ($project->getId() != $id_project || !$project->getNodeList()) {
+                $p = true;
+            } else {
+                 $nodeList = $project->getNodeList();
+            }
+        } else {
+            $p = true;
+        }
+        if ($p) {
             $project=$this->projectManager->extract_Project($id_project);
-            $nodeList=$this->nodeManager->extract_ProjectNodes($project);
+            if ($project) {
+                $nodeList=$this->nodeManager->extract_ProjectNodes($project);
+                if ($nodeList) {
+                    $sortedNodeList=$this->sortNodeList($nodeList);
+                    $project->setNodeList($sortedNodeList);
+                }
+                $_SESSION['project']=serialize($project); 
+            } else {
+                $this->displayRootNodes();
+            }
         }
 
         // conversion de la liste de noeuds en tableau associatif:

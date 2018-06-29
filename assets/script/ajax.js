@@ -1,5 +1,6 @@
 $().ready(function(){
 
+    //Name project update
     var pn = $("#projectName");
     if (pn.length) {
         pn.on('keyup',function(){
@@ -19,6 +20,7 @@ $().ready(function(){
         });
     }
     
+    //New node
     add = function(t) {
         $.ajax({
             url : 'controls/loggoutController.php',
@@ -31,6 +33,8 @@ $().ready(function(){
             success : function(gna){
                 /* Debug */
                 //$('body').before(gna);
+                
+                //New nodeId (to remove node)
                 var pos = gna.indexOf("_*_*_");
                 var id = gna.slice(pos + 5);
                 $('.tache').last().append("<input type='hidden' name='taskUpdate' value='"+id+"'>");
@@ -38,10 +42,8 @@ $().ready(function(){
         }); 
     }
     
+    //Checker node
     progressUpdate = function (id, value) {
-        console.log(id);
-        
-        
         $.ajax({
             url : 'controls/loggoutController.php',
             type : 'post',
@@ -58,6 +60,7 @@ $().ready(function(){
         });
     }
     
+    //Delete node
     remove = function(id) {
         $.ajax({
             url : 'controls/loggoutController.php',
@@ -74,6 +77,7 @@ $().ready(function(){
         });
     }
     
+    //Update node
     updateN = function(id,type,value) {
         var data = {
             taskUpdate: id,
@@ -93,16 +97,20 @@ $().ready(function(){
         }); 
     }
     
-    
 }),(jQuery);
 
 
+//No work on loggout account
 function ajaxDescProject(e) {
     
 }
+
+//New node
 function ajaxAddNode(t) {
     add(t);
 }
+
+//Checker node
 function ajaxProgressNode(elem) {
     elem.click(function(e){
         var e = $(e.target);
@@ -112,6 +120,8 @@ function ajaxProgressNode(elem) {
         progressUpdate(id, val);
     }); 
 }
+
+//Remove node
 function ajaxRemoveNode(elem) {
     elem.click(function(e){
         if (window.confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) { 
@@ -123,6 +133,8 @@ function ajaxRemoveNode(elem) {
         }
     });
 }
+
+//Update node
 function ajaxUpdateNode(elem) {
     elem.on('keyup',function(e){
         var e = $(e.target);

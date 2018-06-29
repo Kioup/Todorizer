@@ -1,33 +1,48 @@
---><main>
+<?php
+
+    /** PROJECTS LIST **/ 
+
+?>
+-->
+<main>
     <section class="dash-mobile">
         <div class="titre">
             <h2 class="underline">Projets</h2>
-            </div>
-            <div class="contenu dashboard">
+        </div>
+        <div class="contenu dashboard">
             <ul>
-            <?php
-                foreach ($projectList as $project){
-            ?>
+                
+<?php
+                
+    foreach ($projectList as $project){
+?>
+                
                 <li>
                     <form method="POST" action="">
                         <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>"> 
                         <input type="hidden" name="view" value="rootNodeList">
+                        
                         <a href="#" onclick="this.parentNode.submit()" >
                             <p><?php echo $project->getName(); ?></p>
                             <span class="background-icon" style="background: <?php echo ($project->getIconColor() ?: "white") ?> "></span>
-                            <span><i class="<?php echo "fas fa-". ($project->getIcon() ?: 'folder'); ?>"></i></span>                
+                            <span>
+                                <i class="<?php echo "fas fa-". ($project->getIcon() ?: 'folder'); ?>"></i>
+                            </span>                
                         </a> 
                     </form>
-                </li>
-            
+                </li>      
       
-            <?php
-                }
-            ?>
+<?php
+                                       
+    }
+                
+?>
+                
                 <li  class="new">
                     <form method="POST" action="">
                         <input type="hidden" name="projectId" value=""> 
                         <input type="hidden" name="view" value="">
+                        
                         <a href="redirect.php?page=newProject.php">
                             <p>Nouveau</p>
                             <span><i class="fas fa-folder"></i></span>
@@ -36,9 +51,10 @@
                     </form>
                 </li>
             </ul>
-
         </div>
-    </section><section>
+    </section>
+    
+    <section>
         <div class="titre">
             <h2 class="underline">Notifications</h2>
         </div>

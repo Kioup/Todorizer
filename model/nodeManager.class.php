@@ -18,7 +18,7 @@ class NodeManager {
         //$this->db->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
-
+    //Create Node
     public function insert(Node $node) {            
         $create = $this->db->prepare(
            'INSERT INTO node ( title, id_project, id_parent, node_path, id_child ) VALUES ( :title, :id_project, :id_parent, :node_path, :id_child )'
@@ -36,6 +36,7 @@ class NodeManager {
         return $id;
     }
 
+    //Return id_child max of root node
     public function findRootBrothers($id_project){
         $request = $this->db->prepare(
             'SELECT MAX(id_child) FROM node WHERE id_project = ? AND id_parent IS NULL'
@@ -49,6 +50,7 @@ class NodeManager {
         return $request;
     }
 
+    //Return node
     public function getNode($id_parent){
         $request = $this->db->prepare(
             'SELECT * FROM node WHERE id = ?'
@@ -60,6 +62,7 @@ class NodeManager {
         return $request[0];
     }
 
+    //Return id child max of node
     public function findBrothers($id_parent){
         $request = $this->db->prepare(
             'SELECT MAX(id_child) FROM node WHERE id_parent = ?'
@@ -125,6 +128,7 @@ class NodeManager {
          );
     }
 
+    //Remove node
     public function delete_node($node_Id){      
         $delete= $this->db->prepare(
             'DELETE FROM node WHERE id = ?'
@@ -145,7 +149,7 @@ class NodeManager {
          );
     }
 
-
+    //Return all nodes of one project
     public function extract_ProjectNodes($project){
         $id_project=$project->getId();
         $request = $this->db->query('SELECT * FROM node WHERE id_project='.$id_project );

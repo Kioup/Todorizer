@@ -6,10 +6,14 @@
     require 'model/userManager.class.php';
     $userManager = new UserManager();
     $user = new User();
+
     // Dev user: 
 //    $data = ['id' => 7, 'name' => 'tante germaine'];
 //    $user->hydrate($data);
-    //**
+    //
+
+
+    //User Controller Route
 
     if (isset($_POST) && isset($_POST['page'])) {
         switch ($_POST['page']) {
@@ -24,11 +28,10 @@
 //                $_SESSION['user'] = serialize($user);
 //                $page = 'blank.php';
 //                break;
-            //**
+            //
                 
             case 'suppCompte':
                 $userManager->delete(unserialize($_SESSION['user'])->getId());
-                
             case 'login' :
                 if ($u = $userManager->connect()){
                     $user->hydrate($u);
@@ -37,7 +40,6 @@
                 } else {
                     $error = true;
                 }
-                
             case 'deco':
                 foreach(['user','projectList','node_path','project','currentProject'] as $sessionVar) unset($_SESSION[$sessionVar]);
                 session_destroy();
@@ -51,14 +53,13 @@
                     if ($_POST['pwd1'] == $_POST['pwd2']) {
                         if ($userManager->updatePwd($_POST['pwd1'], unserialize($_SESSION['user'])->getId())) $error = true;
                     }
-                }
-                
+                } 
             default:
                 $page = $_POST['page'];
         }
     }
 
-    //User controller
+    //Page Route for logged account
     if (isset($_SESSION['user'])) {
         
         $user = unserialize($_SESSION['user'] );
@@ -114,13 +115,12 @@
                     $user->hydrate($userManager->update($user));
                     $_SESSION['user'] = serialize($user);
                 }
-
             default:
                 $url->showHeaderCON();
-    
         }
         
-    //NoUser controller
+    //Loggout account controller
+        
     } else {
         include_once(__CONTROLROOT__ . 'loggoutController.php');
     }

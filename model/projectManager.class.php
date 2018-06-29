@@ -10,6 +10,7 @@ class ProjectManager {
             $this->db = $connection->get_connection();
         }
         
+        //Remove project
         public function deleteProject($project_Id){
             $delete= $this->db->prepare(
                 'DELETE FROM project WHERE id = ?'
@@ -17,7 +18,7 @@ class ProjectManager {
              $delete->execute( [$project_Id] );
         }
 
-
+        //Create project
         public function insert($id_owner) {            
             $create = $this->db->prepare(
                'INSERT INTO project ( id_owner ) VALUES ( :id_owner )'
@@ -29,6 +30,7 @@ class ProjectManager {
             return $id;
         }
 
+        //Update project
         public function update($elementName, $elementValue, $project_Id){
             $update= $this->db->prepare(
                 'UPDATE project SET '.$elementName.' = :elementValue WHERE id = :id'
@@ -41,6 +43,7 @@ class ProjectManager {
              );        
         }
 
+        //Update project icon
         public function updateProjectIcon($project_Id, $iconPath){
             $update= $this->db->prepare(
                 'update project SET icon = :icon WHERE id = :id'
@@ -53,6 +56,7 @@ class ProjectManager {
              );
         }
 
+        //Update project color
         public function updateProjectColor($project_Id, $icon_color){
             $update= $this->db->prepare(
                 'update project SET icon_color = :icon_color WHERE id = :id'

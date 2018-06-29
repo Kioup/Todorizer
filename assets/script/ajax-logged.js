@@ -1,9 +1,9 @@
 $().ready(function(){
     
+    //Name project update
     var pn = $("#projectName");
     if (pn.length) {
         pn.focusout(function(){
-            
             $.ajax({
                 url : 'controls/ajaxController.php',
                 type : 'post',
@@ -24,8 +24,8 @@ $().ready(function(){
         
     }    
     
+    //New node
     add = function(t) {
-
         $.ajax({
             url : 'controls/ajaxController.php',
             type : 'post',
@@ -40,6 +40,8 @@ $().ready(function(){
                 /*Debug */
                 //$('body').before(gna);
                 //console.log(this.data);
+                
+                //New nodePath (href to link node)
                 var pos = gna.indexOf("_*_*_");
                 var id = gna.slice(pos + 5).split(":");
                 $('.tache').last().append("<input type='hidden' name='taskUpdate' value='"+id[0]+"'>");
@@ -49,6 +51,7 @@ $().ready(function(){
         });
     };
     
+    //Delete node
     remove = function(id) {
         $.ajax({
             url : 'controls/ajaxController.php',
@@ -67,6 +70,7 @@ $().ready(function(){
         });
     };
     
+    //Update node
     updateN = function(id,type,value) {
         $.ajax({
             url : 'controls/ajaxController.php',
@@ -86,6 +90,7 @@ $().ready(function(){
         });
     };
     
+    //Checker node
     progressUpdate = function (id, value) {
         $.ajax({
             url : 'controls/ajaxController.php',
@@ -104,7 +109,8 @@ $().ready(function(){
             }
         });
     };
-    
+
+    //Update project description
     projectDesc = function (value) {
         $.ajax({
             url : 'controls/ajaxController.php',
@@ -125,7 +131,8 @@ $().ready(function(){
     
     
 });
-        
+
+//Node checker
 function ajaxProgressNode(elem) {
     elem.click(function(e){
         var e = $(e.target);
@@ -136,10 +143,12 @@ function ajaxProgressNode(elem) {
     }); 
 }
 
-
+//New node
 function ajaxAddNode(t) {
     add(t);
 }
+
+//Delete node
 function ajaxRemoveNode(elem) {
     elem.click(function(e){
         if (window.confirm("Êtes-vous sûr de vouloir supprimer cette tâche ?")) { 
@@ -151,12 +160,16 @@ function ajaxRemoveNode(elem) {
         }
     });
 }
+
+//Update project description
 function ajaxDescProject(elem) {
     elem.focusout(function(e){
        projectDesc($(e.target).val()); 
     });
 }
 
+
+//Update node title or description
 function ajaxUpdateNode(elem) {
     elem.focusout(function(e){
         

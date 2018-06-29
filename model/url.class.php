@@ -2,26 +2,29 @@
 
     class Url {
         
-        private $env;
+        //private $env;
         
         public function __construct() {
-            $this->setEnv();
+            
+            //$this->setEnv();
             
         }
         
         public function get($page) {
                 
-                echo $_SERVER['REQUEST_URI'] . "redirect.php?page=" . $page;
+            echo $_SERVER['REQUEST_URI'] . "redirect.php?page=" . $page;
                             
         }
         
-        private function setEnv() {
-            
-            $this->env = (defined(__ENV__)) ? __ENV__ : ((strstr($_SERVER['HTTP_HOST'],'localhost')) ? 'dev' : 'prod') ;
-            $_SESSION["env"] = $this->env;
-
-        }
+//        private function setEnv() {
+//            
+//            $this->env = (defined(__ENV__)) ? __ENV__ : ((strstr($_SERVER['HTTP_HOST'],'localhost')) ? 'dev' : 'prod') ;
+//            $_SESSION["env"] = $this->env;
+//
+//        }
         
+
+        //Include header
         public function showHeader() {
             
             $url = new Url();
@@ -40,7 +43,8 @@
 
             }
         }
-
+        
+        //Logged header
         public function showHeaderCON(){
             $url = new Url();
             
@@ -50,6 +54,7 @@
 
         }
 
+        //Loggout header
         public function showHeaderDECON(){
             $url = new Url();
             
@@ -59,11 +64,11 @@
 
         }
         
-        public function showPage($page) {
-            
-            
-            
-        }       
+//        public function showPage($page) {
+//            
+//            
+//            
+//        }       
 
     }
 

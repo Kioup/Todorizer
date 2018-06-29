@@ -1,1 +1,1 @@
-<?php ?>
+<?php //blank page ?>

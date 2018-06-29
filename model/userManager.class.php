@@ -13,6 +13,7 @@
             $this->db = $connection->get_connection();
         }
         
+        //Account creation
         public function create() {
             
             $this->hydrate();
@@ -33,7 +34,8 @@
             return $this->user;
 	   }
         
-       public function connect() {
+        //Login
+        public function connect() {
             
             $this->hydrate();
            
@@ -54,6 +56,7 @@
             return false;
         }
         
+        //Update account
         public function update($user) {
              
             $this->user = $user;
@@ -75,6 +78,7 @@
             
         }
         
+        //Update password
         public function updatePwd($pwd, $id) {
             
             $upPwd = $this->db->prepare('UPDATE user SET password = ? WHERE id = ?');
@@ -88,7 +92,7 @@
             
         }
         
-        
+        //Remove account
         public function delete($id) {
             $delete = $this->db->prepare('DELETE FROM user WHERE id = ?');
             $delete->execute(array($id));
