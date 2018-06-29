@@ -23,7 +23,7 @@
                     <span class="fill drop"><i class="fas fa-trash"></i><p>Suppression projet</p></span>
                 </div>
                 <div id="projectDescription">
-                    <textarea placeholder="description longue et fastidieuse du projet"><?php echo $project->getDescription(); ?></textarea>
+                    <textarea placeholder="Entrez un texte descriptif"><?php echo $project->getDescription(); ?></textarea>
                 </div>
             </div>
         </div>

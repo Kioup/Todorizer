@@ -25,6 +25,7 @@ echo '<input type="text" placeholder="Nom du projet" id="projectName" name="name
     <?php echo $project->getDescription(); ?>    
 </div>
 <?php } ?>
+
 <div class="list node">
     <form method="POST" action="">
     <div class="form-block block-task" id="block-task">

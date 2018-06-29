@@ -5,24 +5,25 @@
     require 'model/user.class.php';
     require 'model/userManager.class.php';
     $userManager = new UserManager();
-    // Dev user: 
     $user = new User();
-    $data = ['id' => 7, 'name' => 'tante germaine'];
-    $user->hydrate($data);
+    // Dev user: 
+//    $data = ['id' => 7, 'name' => 'tante germaine'];
+//    $user->hydrate($data);
     //**
 
     if (isset($_POST) && isset($_POST['page'])) {
         switch ($_POST['page']) {
             case 'inscription':
                 $user->hydrate($userManager->create());
+                $_SESSION['user'] = serialize($user);
                 $page = 'blank.php';
                 break;
                 
             // Dev User;
-            case 'connect':
-                $_SESSION['user'] = serialize($user);
-                $page = 'blank.php';
-                break;
+//            case 'connect':
+//                $_SESSION['user'] = serialize($user);
+//                $page = 'blank.php';
+//                break;
             //**
                 
             case 'suppCompte':

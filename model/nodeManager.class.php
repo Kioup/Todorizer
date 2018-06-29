@@ -91,7 +91,6 @@ class NodeManager {
     }
 
     public function update_start_dateNode($date, $node_Id){
-        ECHO "###node_Id".$node_Id;
         $update= $this->db->prepare(
             'UPDATE node SET start_date = :date WHERE id = :id'
          );
@@ -103,7 +102,6 @@ class NodeManager {
          );  
     }
     public function update_end_dateNode($date, $node_Id){
-        ECHO "###node_Id".$node_Id;
         $update= $this->db->prepare(
             'UPDATE node SET end_date = :date WHERE id = :id'
          );

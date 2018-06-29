@@ -14,6 +14,19 @@
                 <div>
                 <span class="fill date"><i class="far fa-calendar-alt"></i><p>Dates</p></span>
                 </div>
+                <div>
+<?php
+                    if ($currentNode->getStartDate() || $currentNode->getEndDate()) 
+                    echo "<div class='date dateEdit'><span class='date1'>
+                        " . $currentNode->getStartDate() . "
+                        </span><span class='date2'>
+                        " . $currentNode->getEndDate() . "
+                        </span></div>
+                    ";
+               
+?>  
+                
+                </div>
                 <div class="tache">
                     <input type="hidden" class="taskUpdate" value="<?php echo $currentNode->getId(); ?>">
                     <textarea row="4" placeholder="Entrez un texte descriptif" data-type="description"><?php echo $currentNode->getDescription();  ?></textarea>

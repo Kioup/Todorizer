@@ -2,7 +2,7 @@
         <section>
             <div class="contenu CGU">
                  	
-                 	<h2>Todorizer v1</h2>
+                 	<h2>Todorizer v2.5</h2>
 
                  	<p>Licence</p>
 
@@ -26,7 +26,7 @@
 
 <p>Tous les éléments de ce site, y compris les documents téléchargeables, sont libres de droit. A l’exception de l’iconographie, la reproduction des pages de ce site est autorisée à la condition d’y mentionner la source. Elles ne peuvent être utilisées à des fins commerciales et publicitaires.</p>  -->
                 <div class="annexe">
-                    <a class="fill2" href="<?php $url->get('profil.php'); ?>">Retour</i></span></a>
+                    <a class="fill2" href="<?php isset($_SESSION["user"]) ? $url->get('profil.php') : $url->get('connexion.php'); ?>">Retour</i></span></a>
                 </div>
             </div>
         </section>

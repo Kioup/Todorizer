@@ -1,6 +1,18 @@
 <?php
-$projectId=$project->getId();
-$nodeId=$currentNode->getId();
+
+$startD = false;
+$startT = false;
+$endD = false;
+$endT = false;
+if ($d = $currentNode->getStartDate()) {
+    $startD = substr($d,0,10);
+    $startT = substr($d,11,16);
+}
+if ($d = $currentNode->getEndDate()) {
+    $endD = substr($d,0,10);
+    $endT = substr($d,11,16);
+}
+
 ?>
 
 <h3>Configuration des échéances pour <i> <?php echo $currentNode->getTitle() ; ?> </i></h3>
@@ -13,14 +25,14 @@ $nodeId=$currentNode->getId();
 
 <form action="redirect.php" method="GET">
 <p>DEBUT:</p>
-    <p> &nbsp Date: <input  type="date" name="start_date"></p>    
-    <p> &nbsp heure: <input type="time" name="start_time" value="00:00"> </p>
+    <p> &nbsp Date: <input  type="date" name="start_date"  value="<?php echo $startD ?: ''; ?>"></p>    
+    <p> &nbsp heure: <input type="time" name="start_time" value="<?php echo $startT ?: '00:00'; ?>"> </p>
 
     <br><br><br>
     
     <p>FIN:</p>
-    <p> &nbsp Date: <input  type="date" name="end_date"></p>    
-    <p> &nbsp heure: <input type="time" name="end_time" value="00:00"> </p>
+    <p> &nbsp Date: <input  type="date" name="end_date"  value="<?php echo $endD ?: ''; ?>"></p>    
+    <p> &nbsp heure: <input type="time" name="end_time"  value="<?php echo $endT ?: '00:00'; ?>"> </p>
 
     <br><br><br>
 
@@ -32,9 +44,9 @@ $nodeId=$currentNode->getId();
     
     <input type="hidden" name="nodeDate" id="nodeDate">
     <input type="hidden" name="page" value="nodeEdit.php">
-    <input type="hidden" name="nodeId" value="<?php echo $nodeId; ?>">
+    <input type="hidden" name="nodeId" value="<?php echo $currentNode->getId(); ?>">
     <input type="hidden" name="nodePath" value="<?php echo $currentNode->getNodePath(); ?>">
-    <input type="hidden" name="projectId" value="<?php echo $projectId; ?>">
+    <input type="hidden" name="projectId" value="<?php echo $project->getId(); ?>">
 
 
 </form>

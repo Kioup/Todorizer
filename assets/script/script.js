@@ -34,21 +34,58 @@ function start(){
     });
 
 
+    //PopUp Event
     $("div.edit div.contenu span.fill").on("click", showHidePopup);
     $("div.overlay").on("click", showHidePopup);
     $("div.popup .close").on("click", showHidePopup);
 
+    //Slider - Changement d'icone
     $("div.popup .slide-left").on("click", slideLeft);
     $("div.popup .slide-right").on("click", slideRight);
     $("div.popup .fa-list-ul").parent().on("click", slideLeft);
     $("div.popup .fa-suitcase").parent().on("click", slideRight);
-
-
     
     
+    //EasterEggs
+    easterEggUno();
+    easterEggDos();
 }
 
+//EasterEgg 1
+var easterEggUno = function() {
+    var active = false;
+    if ($('input').length) {
+        for (input of $('input')) {
+            if (!active) {
+                if ((input.value == "Rappelisator") || (input.value == "Todorizer")) {
+                    $('.header').css('transform','rotateX(-180deg)');
+                    $('body').css('transform','rotateX(180deg)');
+                    active = true;
+                }
+            }
+        }
+    }
+    if (!active) {
+        $('.header').css('transform','rotateX(0)');
+        $('body').css('transform','rotateX(0)');
+    }
+}
 
+//EasterEgg 2
+var easterEggDos = function() {
+    $('.contenu.CGU h2').css('cursor','pointer');
+    $('.contenu.CGU h2').click(function() {
+        var temp = $('.contenu.CGU h2').html();
+        for (elem of $('span, a, p')) {
+            if (Math.random() > 0.5) {
+                $(elem).text('Rappelisator');
+            } else {
+                $(elem).text('Todorizer');
+            }
+        }
+        $('.contenu.CGU h2').html(temp);
+    });
+}
 
 var showHidePopup = function() {
 
@@ -125,9 +162,11 @@ var slide = function(sens) {
 }
 
 function addNode(t) {
+    easterEggUno();
     ajaxAddNode(t);
 }
 function updateNode(e) {
+    easterEggUno();
     ajaxUpdateNode(e);
 }
 function removeNode(e) {

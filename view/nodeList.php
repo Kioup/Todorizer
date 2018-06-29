@@ -27,6 +27,9 @@ foreach ($DecomposedNodePath as $key=>$partOfPath){
 /// fin du fil d'ariane
 ?> 
 </div>
+    
+    
+    
 <div class="entete" style="border:none">
         <div class="tool"><a href="<?php echo $editNodeLink; ?>"><span><i class="fas fa-wrench"></i></span></a></div>
         <input type="hidden" name="ctrl" value="project">
@@ -50,7 +53,20 @@ foreach ($DecomposedNodePath as $key=>$partOfPath){
             <?php echo $currentNode->getDescription(); ?>    
     
         </div>
-<?php      }      
+<?php      } 
+                   
+                   
+ /* DATE */    
+                   
+        if ($currentNode->getStartDate() || $currentNode->getEndDate()) 
+            echo "<div class='date dateNode'><span class='date1'>
+                " . $currentNode->getStartDate() . "
+                </span><span class='date2'>
+                " . $currentNode->getEndDate() . "
+                </span></div>
+            ";
+                   
+                   
             //Si enfants ?
             if ($currentNode->getNbChildren()){
                 //On parcours liste de noeuds

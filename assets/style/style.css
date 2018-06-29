@@ -515,7 +515,7 @@ main div.node div.tache div.tache, main div.nodeList div.tache div.tache {
     text-align: left;
 }
 
-main div.node, main div.nodeList {
+main div.list.node, main div.nodeList {
     padding: 0 100px;
 }
 
@@ -644,7 +644,7 @@ main div.list .tache .child .tache:before {
 }
 
 main div.list form input[type="text"] + a,  main div.list form input[type="text"] ~ span{
-    font-size: 1.2em;
+    font-size: 1.4em;
     display: inline-block;
     text-decoration: none;
     color: white;
@@ -806,6 +806,33 @@ main div.ariane a {
     padding: 5px 20px;
     text-align: center;
     font-size: 0.8em;
+}
+
+main div.list div.date {
+    margin: 5px 0;
+    padding: 0 60px
+}
+
+main  div.list form div.tache div.develop div.dateList {
+    font-size: 0.9em;
+    display: inline-block;
+    text-align: left;
+}
+
+main div.list div.date span, main div.contenu div.dateEdit span {
+    background: transparent;
+    border: solid 1px white;
+    border-radius: 5px;
+    margin: 0 10px;
+    padding: 2px 5px;
+    width: auto;
+    height: auto;
+    font-size: 0.9em;
+    color: white;
+    font-family: Comfortaa, Arial, sans-serif;
+}
+main div.list div.date span:first-child {
+    margin-left: 0;
 }
 
 /* 
@@ -1028,7 +1055,7 @@ div.PJ div.drop p {
 
 /* popup date */
 
-.date {
+div.popup div.date {
     font-family: "Roboto Mono", Arial, Helvetica, sans-serif;
 }
 

@@ -3,7 +3,7 @@ $().ready(function(){
     var pn = $("#projectName");
     if (pn.length) {
         pn.focusout(function(){
-            console.log($("#projectID").val());
+            
             $.ajax({
                 url : 'controls/ajaxController.php',
                 type : 'post',
@@ -161,11 +161,9 @@ function ajaxUpdateNode(elem) {
     elem.focusout(function(e){
         
         var e = $(e.target);
-        console.log(e);
         var value = e[0].value;
         if (value != "") {
             var type = e.data('type');
-            console.log(e.parents('.tache'));
             
             var child = e.parents('.tache').children('.taskUpdate')[0];
             var id = child.value;

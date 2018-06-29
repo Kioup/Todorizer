@@ -20,7 +20,7 @@
             <div class="annexe">
                 <a class="fill2" href="<?php $url->get('connexion.php'); ?>">Connexion</a>
                 <span>
-                    <a href=""><i class="far fa-question-circle"></i></a>
+                    <a href="<?php $url->get('CGU.php'); ?>"><i class="far fa-question-circle"></i></a>
                 </span>
             </div>
         </section>

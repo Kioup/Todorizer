@@ -20,7 +20,6 @@ if (isset($_POST['ajax'])){
             break;
 
         case "titleNodeUpdate":
-            echo "VALUE: ". $_POST['value'];
             //$nodeManager->update_title($_POST['value'], $_POST['nodeId']);
             $nodeManager->update_nodeElement("title",$_POST['value'], $_POST['nodeId']);
             break;

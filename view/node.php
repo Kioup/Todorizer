@@ -27,6 +27,20 @@
             <a href="<?php echo $nodeListString ?>" >
                 <span class="pen"><i class="fas fa-pencil-alt"></i>
                 </span>
+<?php
+            if ($currentChildNode->getStartDate() || $currentChildNode->getEndDate()) 
+            echo "<div class='date dateList'><span class='date1'>
+                " . $currentChildNode->getStartDate() . "
+                </span><span class='date2'>
+                " . $currentChildNode->getEndDate() . "
+                </span></div>
+            ";
+               
+?>
+    
+    
+    
+    
             </a>       
         </div>
     </div>

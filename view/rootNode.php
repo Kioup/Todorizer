@@ -25,8 +25,22 @@
             <a href="<?php echo $nodeListString ?>" >
                 <span class="pen"><i class="fas fa-pencil-alt"></i>
                 </span>
-            </a>       
+            </a>
         </div>
+            
+<?php
+            if ($node->getStartDate() || $node->getEndDate()) 
+            echo "<div class='date dateList'><span class='date1'>
+                " . $node->getStartDate() . "
+                </span><span class='date2'>
+                " . $node->getEndDate() . "
+                </span></div>
+            ";
+               
+?>
+      
+
+        
     </div>
     <input type="hidden" name="taskUpdate" class="taskUpdate" value="<?php echo $node->getId(); ?>">
 

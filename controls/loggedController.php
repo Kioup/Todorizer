@@ -48,10 +48,12 @@ Class LoggedController{
     }
 
     public function update_start_dateNode($date, $id_node){
+        unset( $_SESSION['project']);
         $this->nodeManager->update_start_dateNode($date,$id_node);
     }
 
     public function update_end_dateNode($date, $id_node){
+        unset( $_SESSION['project']);
         $this->nodeManager->update_end_dateNode($date,$id_node);
     }
 
