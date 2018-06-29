@@ -91,7 +91,8 @@
         foreach ($sortedNodeList as $childNodePath => $currentChildNode) {                    
             $np = explode('.',$childNodePath);
             //Si le path enfant comporte le path parent
-            if (!strpos($childNodePath,$currentNode->getNodePath())){
+            $pos=strpos($childNodePath,$currentNode->getNodePath());
+            if ($pos!==false){
               //  $count=(count($DecomposedNodePath)+1);
                 //Si l'enfant est un enfant direct
                 if ((count($np) == count($DecomposedNodePath)+1)) {                            
